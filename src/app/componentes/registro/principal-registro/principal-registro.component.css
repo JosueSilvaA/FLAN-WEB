@@ -1,0 +1,32 @@
+.contenedor-formulario{
+    background: url(../../../../assets/img/registro-usuario.jpg);
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 92vh;
+    padding: 0;
+}
+
+.row{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: #00000077;
+}
+
+.formulario{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.registroUsuario{
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 5px;
+} 
+
+.boton-registrar{
+    display: flex;
+    justify-content: center;
+}

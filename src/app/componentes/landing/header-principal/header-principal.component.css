@@ -1,0 +1,59 @@
+.header{
+    
+}
+
+.logo{
+    background:  #f9e79f ;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.logo a{
+    display: flex;
+}
+
+.logo a p{
+    font-size: 18px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.gestion-sesion {
+}
+
+.sesion{
+    margin-left: 30px;
+}
+
+.modal{
+    margin-top: 200px;
+}
+.modal-title{
+    font-size: 30px;
+}
+.boton-cancelar{
+    margin-left: 20px;
+}
+
+.modal-header{
+    background: #f1c40f  ;
+    color: #2c3e50;
+}
+
+.parrafos{
+    text-align: justify;
+}
+
+.error{
+    width: 100%;
+    color: red;
+}
+
+.input-error{
+    border-color: red;
+}
+
+.nav-link{
+    color: rgba(255,255,255,.5);
+}

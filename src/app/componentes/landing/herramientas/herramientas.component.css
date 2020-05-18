@@ -1,0 +1,64 @@
+
+.contenedor-herramientas{
+    width: 100%;
+    height: 50vh;
+    background: url(../../../../assets/img/muro.jpg);
+    background-size: cover;
+    background-position: center center;  
+}
+
+.categorias-herramientas{
+width: 100%;
+height: 100%;
+background: #00000056;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.frase{
+text-align: center;
+color: white;
+font-size: 70px;
+font-weight: bold;
+}
+
+.opciones-sitio{
+text-align: center;
+color: white;
+font-size: 30px;
+font-weight: bold; 
+}
+
+.contenedor-opciones{
+width: 100%;
+height: auto;
+background:  #fef9e7a8;
+/* border: 1px solid black; */
+}
+
+.definicion-opciones{
+width: 70%;
+margin: 0 auto;
+padding: 20px;
+/* border: 1px solid black; */
+}
+
+img{
+width: 100%;
+}
+
+.separador-herramientas{
+width: 100%;
+height: 40px;
+background:     #117a65   ;
+}
+
+img{
+width: 300px;
+}
+
+.definicion-categoria{
+font-size: 30px;
+color: red;
+}
