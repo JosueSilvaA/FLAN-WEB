@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl,FormGroup,Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UsuarioI } from '../../../interfaces/usuario'
 import { UsuarioService } from '../../../services/usuario.service'
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2/src/sweetalert2.js'
 
 
 @Component({

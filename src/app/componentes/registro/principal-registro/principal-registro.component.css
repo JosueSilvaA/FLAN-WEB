@@ -30,3 +30,12 @@
     display: flex;
     justify-content: center;
 }
+
+.error{
+    width: 100%;
+    color: red;
+}
+
+.input-error{
+    border-color: red;
+}

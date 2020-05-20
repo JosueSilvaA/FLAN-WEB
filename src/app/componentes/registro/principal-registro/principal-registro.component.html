@@ -3,34 +3,65 @@
         <div class="col-xl-4"></div>
         <div class="col-xl-4 formulario">
             <div class="registroUsuario">
-              <form>
+              <form [formGroup] ="RegistroUsuario">
                   <div>
                     <h4>REGISTRO USUARIO</h4><hr>
                   </div>
                   <div class="form-group">
                     <label for="inputAddress">Usuario</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="Ej:Jmark98">
+                    <input type="text" class="form-control" id="inputAddress" placeholder="Ej:Jmark98" [ngClass]="{'input-error':usuario.invalid && (usuario.dirty || usuario.touched)}" formControlName="usuario" required>
+                    <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="error">
+                      <span *ngIf ="usuario.errors.required">Error el campo es obligatorio</span>
+                    </div>
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
-                      <label for="inputEmail4">Correo Electronico</label>
-                      <input type="email" class="form-control" id="inputEmail4">
+                      <label for="nombres">Nombres</label>
+                      <input type="text" class="form-control" id="nombres" placeholder="Daniel Enrique" [ngClass]="{'input-error':nombres.invalid && (nombres.dirty || nombres.touched)}" formControlName="nombres" required>
+                      <div *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)" class="error">
+                        <span *ngIf ="nombres.errors.required">Error el campo es obligatorio</span>
+                      </div>
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="inputPassword4">Contraseña</label>
-                      <input type="password" class="form-control" id="inputPassword4">
+                      <label for="apellidos">Apellidos</label>
+                      <input type="text" class="form-control" id="apellidos" placeholder="Silva Aguirre" [ngClass]="{'input-error':apellidos.invalid && (apellidos.dirty || apellidos.touched)}" formControlName="apellidos" required>
+                      <div *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)" class="error">
+                        <span *ngIf ="apellidos.errors.required">Error el campo es obligatorio</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="correoE">Correo Electronico</label>
+                      <input type="email" class="form-control" id="correoE" placeholder="dani@gmail.com" [ngClass]="{'input-error':correo.invalid && (correo.dirty || correo.touched)}" formControlName="correo" required>
+                      <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="error">
+                        <span *ngIf ="correo.errors.required">Error el campo es obligatorio</span>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="contrasenaU">Contraseña</label>
+                      <input type="password" class="form-control" id="contrasenaU" placeholder="********" [ngClass]="{'input-error':contrasena.invalid && (contrasena.dirty || contrasena.touched)}" formControlName="contrasena" required>
+                      <div *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)" class="error">
+                        <span *ngIf ="contrasena.errors.required">Error el campo es obligatorio</span>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputAddress">Direccion</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="Tegucigalpa,Barrio Guanacaste">
+                    <label for="direccion">Direccion</label>
+                    <input type="text" class="form-control" id="direccion" placeholder="Tegucigalpa,Barrio Guanacaste" [ngClass]="{'input-error':direccion.invalid && (direccion.dirty || direccion.touched)}" formControlName="direccion" required>
+                    <div *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)" class="error">
+                      <span *ngIf ="direccion.errors.required">Error el campo es obligatorio</span>
+                    </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputAddress2">Telefono</label>
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="Ej:99345612">
+                    <label for="telefono">Telefono</label>
+                    <input type="text" class="form-control" id="telefono" placeholder="Ej:99345612" [ngClass]="{'input-error':telefono.invalid && (telefono.dirty || telefono.touched)}" formControlName="telefono" required>
+                    <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="error">
+                      <span *ngIf ="telefono.errors.required">Error el campo es obligatorio</span>
+                    </div>
                   </div>
                   <div class="boton-registrar">
-                    <button  type="submit" class="btn btn-primary">Registrar</button>
+                    <button [disabled]="!RegistroUsuario.valid" type="submit" class="btn btn-primary" (click)="registrar()">Registrar</button>
                   </div>
                 </form>
             </div>
