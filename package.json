@@ -21,8 +21,10 @@
     "@angular/platform-browser-dynamic": "~9.0.1",
     "@angular/router": "~9.0.1",
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
+    "@sweetalert2/theme-borderless": "^3.1.4",
     "bootstrap": "^4.4.0",
     "rxjs": "~6.5.4",
+    "sweetalert2": "^9.11.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

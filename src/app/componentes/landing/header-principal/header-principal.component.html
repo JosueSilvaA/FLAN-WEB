@@ -18,7 +18,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/herramientas">herramientas</a>
+                    <a class="nav-link" routerLink="/herramientas">Herramientas</a>
                 </li>
                 <li ngbDropdown class="nav-item">
                     <a href (click)="false" class="nav-link" ngbDropdownToggle>Acerca De</a>
@@ -75,7 +75,7 @@
                                 <span *ngIf ="contraN.errors.required">Error el campo es obligatorio</span>
                             </div>
                         </div>
-                        <button [disabled]="!InicioSesionUsuario.valid" data-dismiss="modal"  type="submit" class="btn btn-primary" (click)="Loguear()">Loguear</button>
+                        <button [disabled]="!InicioSesionUsuario.valid" data-dismiss="modal"  type="submit" class="btn btn-primary" (click)="loginRegistrado()">Loguear</button>
                       </form>
                 </div>
               </ng-template>
@@ -107,7 +107,7 @@
                             <span *ngIf ="contraA.errors.required">Error el campo es obligatorio</span>
                         </div>
                         </div>
-                        <button [disabled]="!InicioSesionAdmin.valid" data-dismiss="modal" type="submit" class="btn btn-primary">Loguear</button>
+                        <button [disabled]="!InicioSesionAdmin.valid" data-dismiss="modal" type="submit" class="btn btn-primary" (click)="loginAdmin()">Loguear</button>
                       </form>
                 </div>
               </ng-template>
