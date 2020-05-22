@@ -3,6 +3,7 @@ import { FormControl,FormGroup,Validators} from '@angular/forms/';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario.service';
 import  Swal  from 'sweetalert2'
+import '@sweetalert2/theme-borderless'
 
 @Component({
   selector: 'app-principal-registro',

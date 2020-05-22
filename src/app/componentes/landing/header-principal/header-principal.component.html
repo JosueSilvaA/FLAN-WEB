@@ -29,14 +29,54 @@
                 </li>
             </ul>
         </div>
+
+        <ng-template #modalNosotros let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Login Administrador</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <p class="parrafos">
+                  Flan es un CMS el cual la temática de colores y de interactividad es entorno al color amarillo característico del postre. El motivo del nombre y del icono que es el característico de GitHub es porque el proceso del flan se parece al proceso de crear y diseñar una página web porque, aunque el final se sabe que será un flan, lo que no se sabe es el aspecto que el tendrá.
+                  El proceso que se da en un CMS es el mismo porque es el usuario el que elige que ponerle y como ponerle los componentes que quisiera su página y la temática que quisiera.
+              </p>
+          </div>
+        </ng-template>
+      
+        <ng-template #modalAyuda let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Login Administrador</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div>
+                  <h4><b>Inicio</b></h4>
+                  <p>Si usted tiene inconvenientes o dudas sobre como hacer el proceso de instalacion o implementacion de nuestro sistema lea la siguiente documentacion.  <a href="https://github.com/JosueSilvaA/ProyectoFlanAngular" target="_blank">Seguir lectura en Github</a></p>
+                 
+                </div>
+                <div>
+                  <h4><b>Crear</b></h4>
+                  <p>Si usted tiene inconvenientes o dudas sobre el manejo del sistema puede leer el manual en el enlace adjunto. <a href="https://github.com/JosueSilvaA/ProyectoFlanAngular" target="_blank">Seguir lectura en Github</a></p>
+                  
+                </div>
+                <div>
+                  <h4><b>Soporte Tecnico</b></h4>
+                  <p>Si usted tiene inconvenientes o fallas en el sistema contactenos al siguiente numero . <b>22305522</b></p>
+                </div>
+          </div>
+        </ng-template>
       </nav>
       <!----------------modal ayuda y soporte------------>
 
       <!----------------------------------------->
       <!--INICIO GESTION SESION-->
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark col-xl-3 gestion-sesion">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul ngbNav #nav="ngbNav"  class=" justify-content-center">
+      <nav  class="navbar navbar-expand-lg navbar-dark bg-dark col-xl-3 gestion-sesion">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{sesion:usuario}" placement="bottom-left">
+            <ul *ngIf="token ==null" ngbNav #nav="ngbNav"  class=" justify-content-center">
                 <li ngbDropdown class="nav-item">
                     <a href (click)="false" class="nav-link" ngbDropdownToggle>Inicio Sesion</a>
                     <div ngbDropdownMenu>
@@ -47,6 +87,14 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/registroUsuario">Registrarse</a>
                 </li>
+            </ul>
+            <ul *ngIf="token !=null && usuario !=''" ngbNav #nav="ngbNav">
+              <li ngbDropdown class="nav-item">
+                <a href (click)="false" class="nav-link usuario" ngbDropdownToggle>{{usuario}}</a>
+                <div ngbDropdownMenu class="logout">
+                    <button ngbDropdownItem (click)="logout()">Cerrar Sesion</button>
+                </div>
+              </li>
             </ul>
             <!--FIN BOTON LOGIN-->
   
@@ -112,45 +160,7 @@
                 </div>
               </ng-template>
             <!---fin modal administrador-->
-              <ng-template #modalNosotros let-modal>
-                <div class="modal-header">
-                  <h4 class="modal-title" id="modal-basic-title">Login Administrador</h4>
-                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <p class="parrafos">
-                        Flan es un CMS el cual la temática de colores y de interactividad es entorno al color amarillo característico del postre. El motivo del nombre y del icono que es el característico de GitHub es porque el proceso del flan se parece al proceso de crear y diseñar una página web porque, aunque el final se sabe que será un flan, lo que no se sabe es el aspecto que el tendrá.
-                        El proceso que se da en un CMS es el mismo porque es el usuario el que elige que ponerle y como ponerle los componentes que quisiera su página y la temática que quisiera.
-                    </p>
-                </div>
-              </ng-template>
-            
-              <ng-template #modalAyuda let-modal>
-                <div class="modal-header">
-                  <h4 class="modal-title" id="modal-basic-title">Login Administrador</h4>
-                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <div>
-                        <h4><b>Inicio</b></h4>
-                        <p>Si usted tiene inconvenientes o dudas sobre como hacer el proceso de instalacion o implementacion de nuestro sistema lea la siguiente documentacion.  <a href="https://github.com/JosueSilvaA/ProyectoFlanAngular" target="_blank">Seguir lectura en Github</a></p>
-                       
-                      </div>
-                      <div>
-                        <h4><b>Crear</b></h4>
-                        <p>Si usted tiene inconvenientes o dudas sobre el manejo del sistema puede leer el manual en el enlace adjunto. <a href="https://github.com/JosueSilvaA/ProyectoFlanAngular" target="_blank">Seguir lectura en Github</a></p>
-                        
-                      </div>
-                      <div>
-                        <h4><b>Soporte Tecnico</b></h4>
-                        <p>Si usted tiene inconvenientes o fallas en el sistema contactenos al siguiente numero . <b>22305522</b></p>
-                      </div>
-                </div>
-              </ng-template>
+              
             <!--FIN BOTON REGISTRO-->  
         </div>
       </nav>

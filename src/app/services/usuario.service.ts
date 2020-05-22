@@ -10,6 +10,9 @@ export class UsuarioService {
   URL_SERVER: string = 'https://api-flan.herokuapp.com'
   Subject = new BehaviorSubject(false);
   private token: string;
+  private usuario:string;
+  private id:string;
+
   constructor(private httpClient:HttpClient) { }
   //lOGIN DE LOS USUARIOS
   loginRegistrado(usuario): Observable<any>{
@@ -18,8 +21,7 @@ export class UsuarioService {
     pipe(tap(
       (res)=>{
         if(res){
-          console.log("respuesta",res)
-          this.guardarToken(res.accessToken,res.expiresIn,res.nombres,res.id);
+          this.guardarToken(res.accessToken,res.expiresIn,res.id,res.usuario);
         }
       }
     ))
@@ -32,7 +34,7 @@ export class UsuarioService {
       (res)=>{
         if(res){
           console.log("respuesta",res)
-          this.guardarToken(res.accessToken,res.expiresIn,res.nombres,res.id);
+          this.guardarToken(res.accessToken,res.expiresIn,res.id,res.usuario);
         }
       }
     ))
@@ -41,7 +43,9 @@ export class UsuarioService {
   logout():void{
     this.token = '';
     localStorage.removeItem("ACCESS_TOKEN");
-    localStorage.removeItem("EXPIRES_IN");
+    localStorage.removeItem("USUARIO");
+    localStorage.removeItem("ID");
+    localStorage.removeItem("EXPIRES_IN");;
   }
 
   /////OPERACIONES CON EL USUARIO
@@ -59,19 +63,33 @@ export class UsuarioService {
 
 
   //Gestion de los tokens
-  guardarToken(token:string,expiresIn:string,id:string,nombres:string):void{
+  guardarToken(token:string,expiresIn:string,id:string,usuario:string):void{
     localStorage.setItem("ACCESS_TOKEN",token);
     localStorage.setItem("EXPIRES_IN",expiresIn);
-    localStorage.setItem("NOMBRE",nombres);
+    localStorage.setItem("USUARIO",usuario);
     localStorage.setItem("ID",id);
     this.token= token;
   }
 
   getToken():string{
     if(!this.token){
-      this.token = localStorage.getItem("ACCESS_TOKEN");
+      this.token=localStorage.getItem("ACCESS_TOKEN");
     }
     return this.token;
+  }
+
+  getUsuario():string{
+    if(!this.usuario){
+      this.usuario=localStorage.getItem("USUARIO");
+    }
+    return this.usuario;
+  }
+
+  getId():string{
+    if(!this.id){
+      this.id=localStorage.getItem("ID");
+    }
+    return this.id;
   }
 }
 

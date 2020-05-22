@@ -14,7 +14,7 @@ import Swal from 'sweetalert2/src/sweetalert2.js'
 export class HeaderPrincipalComponent implements OnInit {
   Toast:any = Swal.mixin({
     toast: true,
-    position: 'bottom-end',
+    position: 'top-end',
     showConfirmButton: false,
     timer: 4000,
     timerProgressBar: true,
@@ -33,10 +33,15 @@ export class HeaderPrincipalComponent implements OnInit {
     correo : new FormControl('',[Validators.required,Validators.email]),
     contra : new FormControl('',[Validators.required])
   });
- 
+  
+  token:string=null;
+  usuario:string;
+  variable:number = 2;
   constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService) { }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem("ACCESS_TOKEN")
+    this.usuario = localStorage.getItem("USUARIO") 
   }
 
 
@@ -64,11 +69,14 @@ export class HeaderPrincipalComponent implements OnInit {
           title: `${res.mensaje}`
         })
        }else{
+
+         this.token=this.usuarioService.getToken();
+         this.usuario = localStorage.getItem("USUARIO")
          this.router.navigate(['/blog']);
          this.modalService.dismissAll();
          this.Toast.fire({
           icon: 'success',
-          title: `Bienvenido ${res.nombres}`
+          title: `Bienvenido ${res.usuario}`
         })
        }
      })  
@@ -83,19 +91,27 @@ export class HeaderPrincipalComponent implements OnInit {
           title: `${res.mensaje}`
         })
       }else{
-        
+        this.token=this.usuarioService.getToken();
+        this.usuario = localStorage.getItem("USUARIO")
+        console.log("USUARIO",this.usuario)
         this.router.navigate(['/herramientas']);
         this.modalService.dismissAll();
         this.Toast.fire({
           icon: 'success',
-          title: `Bienvenido ${res.nombres}`
+          title: `Bienvenido ${res.usuario}`
         })
         this.InicioSesionAdmin.reset();
+        console.log(this.usuarioService.getToken());
       }
     });
   }
   
-
+  logout(){
+    this.usuarioService.logout();
+    this.token = localStorage.getItem("ACCESS_TOKEN")
+    this.usuario = localStorage.getItem("USUARIO") 
+    this.router.navigate(['/principal'])
+  }
 
   abrirLogin(modal:any){
     this.modalService.open(
@@ -116,5 +132,6 @@ export class HeaderPrincipalComponent implements OnInit {
         }
       )
   }
+
 
 }
