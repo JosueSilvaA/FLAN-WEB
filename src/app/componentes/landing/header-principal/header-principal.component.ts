@@ -116,6 +116,12 @@ export class HeaderPrincipalComponent implements OnInit {
     this.router.navigate(['/principal'])
   }
 
+  //////////////////////////////
+  editarInfoUsuario(){
+    this.opcionPerfilInfo=1;
+    this.opcionPerfil=1;
+  }
+
   //MODALES DEL HEADER PRINCIPAL
 
   abrirLogin(modal:any){

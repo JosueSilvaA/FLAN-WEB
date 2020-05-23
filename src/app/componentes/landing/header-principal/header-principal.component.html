@@ -171,8 +171,27 @@
   </div>
   <div class="modal-body">
     <div *ngIf="opcionPerfil==0" class="opciones-edicion">
-      <button class="btn btn-outline-warning mr-2">Editar Informacion</button>
+      <button class="btn btn-outline-warning mr-2" (click)="editarInfoUsuario()">Editar Informacion</button>
       <button class="btn btn-outline-dark mr-2">Editar Imagen</button>
+    </div>
+    <div *ngIf="(opcionPerfil!=0 && opcionPerfilInfo==1)">
+      <form [formGroup] ="InicioSesionAdmin">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Correo Electronico</label>
+          <input type="email" class="form-control" [ngClass]="{'input-error':correoA.invalid && (correoA.dirty || correoA.touched)}" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="correo" required>
+          <div *ngIf="correoA.invalid && (correoA.dirty || correoA.touched)" class="error">
+            <span *ngIf ="correoA.errors.required">Error el campo es obligatorio</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Contraseña">Contraseña</label>
+          <input type="password" id="Contraseña" class="form-control" [ngClass]="{'input-error':contraA.invalid && (contraA.dirty || contraA.touched)}" formControlName="contra" required>
+          <div *ngIf="contraA.invalid && (contraA.dirty || contraA.touched)" class="error">
+            <span *ngIf ="contraA.errors.required">Error el campo es obligatorio</span>
+        </div>
+        </div>
+        <button [disabled]="!InicioSesionAdmin.valid" data-dismiss="modal" type="submit" class="btn btn-primary" (click)="loginAdmin()">Loguear</button>
+      </form>
     </div>
   </div>
   <div class="modal-footer">
