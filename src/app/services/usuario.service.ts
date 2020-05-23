@@ -42,10 +42,10 @@ export class UsuarioService {
 
   logout():void{
     this.token = '';
-    localStorage.removeItem("ACCESS_TOKEN");
-    localStorage.removeItem("USUARIO");
-    localStorage.removeItem("ID");
-    localStorage.removeItem("EXPIRES_IN");;
+    sessionStorage.removeItem("ACCESS_TOKEN");
+    sessionStorage.removeItem("USUARIO");
+    sessionStorage.removeItem("ID");
+    sessionStorage.removeItem("EXPIRES_IN");;
   }
 
   /////OPERACIONES CON EL USUARIO
@@ -64,30 +64,30 @@ export class UsuarioService {
 
   //Gestion de los tokens
   guardarToken(token:string,expiresIn:string,id:string,usuario:string):void{
-    localStorage.setItem("ACCESS_TOKEN",token);
-    localStorage.setItem("EXPIRES_IN",expiresIn);
-    localStorage.setItem("USUARIO",usuario);
-    localStorage.setItem("ID",id);
+    sessionStorage.setItem("ACCESS_TOKEN",token);
+    sessionStorage.setItem("EXPIRES_IN",expiresIn);
+    sessionStorage.setItem("USUARIO",usuario);
+    sessionStorage.setItem("ID",id);
     this.token= token;
   }
 
   getToken():string{
     if(!this.token){
-      this.token=localStorage.getItem("ACCESS_TOKEN");
+      this.token=sessionStorage.getItem("ACCESS_TOKEN");
     }
     return this.token;
   }
 
   getUsuario():string{
     if(!this.usuario){
-      this.usuario=localStorage.getItem("USUARIO");
+      this.usuario=sessionStorage.getItem("USUARIO");
     }
     return this.usuario;
   }
 
   getId():string{
     if(!this.id){
-      this.id=localStorage.getItem("ID");
+      this.id=sessionStorage.getItem("ID");
     }
     return this.id;
   }

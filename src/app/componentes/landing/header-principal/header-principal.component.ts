@@ -12,11 +12,25 @@ import Swal from 'sweetalert2/src/sweetalert2.js'
   styleUrls: ['./header-principal.component.css']
 })
 export class HeaderPrincipalComponent implements OnInit {
+  token:string=null;
+  usuario:string;
+  public isMenuCollapsed = true;
+  opcionPerfil:number=0;
+  opcionPerfilInfo:number=0;
+  opcionPerfilFoto:number=0;
+  
+  constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService) { }
+
+  ngOnInit(): void {
+    this.token = sessionStorage.getItem("ACCESS_TOKEN")
+    this.usuario = sessionStorage.getItem("USUARIO") 
+  }
+
   Toast:any = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 4000,
+    timer: 3000,
     timerProgressBar: true,
     onOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -34,16 +48,6 @@ export class HeaderPrincipalComponent implements OnInit {
     contra : new FormControl('',[Validators.required])
   });
   
-  token:string=null;
-  usuario:string;
-  variable:number = 2;
-  constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService) { }
-
-  ngOnInit(): void {
-    this.token = localStorage.getItem("ACCESS_TOKEN")
-    this.usuario = localStorage.getItem("USUARIO") 
-  }
-
 
   get correoN(){
     return this.InicioSesionUsuario.get('correo');
@@ -71,12 +75,12 @@ export class HeaderPrincipalComponent implements OnInit {
        }else{
 
          this.token=this.usuarioService.getToken();
-         this.usuario = localStorage.getItem("USUARIO")
+         this.usuario = sessionStorage.getItem("USUARIO")
          this.router.navigate(['/blog']);
          this.modalService.dismissAll();
          this.Toast.fire({
           icon: 'success',
-          title: `Bienvenido ${res.usuario}`
+          title: `Bienvenid@ ${res.usuario}`
         })
        }
      })  
@@ -92,8 +96,7 @@ export class HeaderPrincipalComponent implements OnInit {
         })
       }else{
         this.token=this.usuarioService.getToken();
-        this.usuario = localStorage.getItem("USUARIO")
-        console.log("USUARIO",this.usuario)
+        this.usuario = sessionStorage.getItem("USUARIO")
         this.router.navigate(['/herramientas']);
         this.modalService.dismissAll();
         this.Toast.fire({
@@ -108,10 +111,12 @@ export class HeaderPrincipalComponent implements OnInit {
   
   logout(){
     this.usuarioService.logout();
-    this.token = localStorage.getItem("ACCESS_TOKEN")
-    this.usuario = localStorage.getItem("USUARIO") 
+    this.token = sessionStorage.getItem("ACCESS_TOKEN")
+    this.usuario = sessionStorage.getItem("USUARIO") 
     this.router.navigate(['/principal'])
   }
+
+  //MODALES DEL HEADER PRINCIPAL
 
   abrirLogin(modal:any){
     this.modalService.open(
@@ -133,5 +138,18 @@ export class HeaderPrincipalComponent implements OnInit {
       )
   }
 
+  abrirEditarPerfil(modal:any){
+    this.modalService.open(
+      modal,
+      {
+        size:'lg',
+        centered:true
+      }
+    )
+  }
+
+  cerrarModal(){
+    this.modalService.dismissAll();
+  }
 
 }

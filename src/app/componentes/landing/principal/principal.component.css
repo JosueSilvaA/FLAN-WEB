@@ -1,6 +1,6 @@
 .fondo{
     width: 100%;
-    height: 90vh;
+    height: 80vh;
     background: url(../../../../assets/img/fondo.jpg);
     background-size: cover;
     background-position: center center;
@@ -23,8 +23,9 @@
 
 .categorias{
     width: 100%;
-    height: 60vh;
+    height: 50vh;
     background: #fcf3cf9c;
+
 }
 
 .contenedor-tabla{
@@ -38,7 +39,8 @@
 
 .contenedor-testimonial{
     width: 100%;
-    height: 70vh;
+    height: auto;
+    min-height: 70vh;
 }
 
 .foto-testimonial{
@@ -72,5 +74,61 @@
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
+.icon{
+    font-size: 30px;
+}
+@media (max-width: 1200px){
+    .tarjeta-testimoniales{
+        padding-top: 10px;
+    }
+}
 
 
+@media (max-width: 992px){
+    .categorias{
+        height: 60vh;
+    }
+    
+    .tabla-categorias tr td{
+        font-size: 15px;
+    }
+
+    .contenedor-tabla{
+        width: 80%;
+    }
+
+    .tarjeta-testimoniales{
+        padding-top: 10px;
+    }
+}
+
+
+
+@media (max-width: 768px){
+    .categorias{
+        height: 60vh;
+    }
+    
+    .tabla-categorias tr td{
+        font-size: 15px;
+    }
+
+    .contenedor-tabla{
+        width: 80%;
+    }
+
+    .tarjeta-testimoniales{
+        padding-top: 10px;
+    }
+}
+
+
+@media (max-width: 576px){
+    .categorias{
+        height: 500px;
+    }
+    
+    .tabla-categorias tr td{
+        font-size: 15px;
+    }
+}

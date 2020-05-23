@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faTools,faBusinessTime,faUserSecret,faScroll} from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-principal',
@@ -7,6 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrincipalComponent implements OnInit {
 
+  faTools = faTools;
+  faBusinessTime = faBusinessTime;
+  faUserSecret = faUserSecret;
+  faScroll = faScroll;
+  
   constructor() { }
 
   ngOnInit(): void {
