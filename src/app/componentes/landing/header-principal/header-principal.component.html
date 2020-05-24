@@ -44,7 +44,11 @@
         <li *ngIf="token ==null" class="nav-item">
             <a class="nav-link" routerLink="/registroUsuario">Registrarse</a>
         </li>
+        <li class="nav-item" *ngIf="token !=null && usuario !=''"> 
+          <div *ngIf="fotoPerfil=='../../../../assets/img/perfil_default.jpg'" class="nav-link foto-perfil"><img src="{{fotoPerfil}}" alt="foto..perfil"></div>
+        </li>
         <li  *ngIf="token !=null && usuario !=''" ngbDropdown class="nav-item">
+          
           <a href (click)="false" class="nav-link perfil" ngbDropdownToggle>{{usuario}}</a>
           <div ngbDropdownMenu class="opciones-perfil">
             <button ngbDropdownItem (click)="abrirEditarPerfil(modalEditarPerfil)">Editar Perfil</button>
@@ -171,30 +175,46 @@
   </div>
   <div class="modal-body">
     <div *ngIf="opcionPerfil==0" class="opciones-edicion">
-      <button class="btn btn-outline-warning mr-2" (click)="editarInfoUsuario()">Editar Informacion</button>
+      <button class="btn btn-outline-warning mr-2" (click)="infoUsuarioLogueado()">Editar Informacion</button>
       <button class="btn btn-outline-dark mr-2">Editar Imagen</button>
     </div>
     <div *ngIf="(opcionPerfil!=0 && opcionPerfilInfo==1)">
-      <form [formGroup] ="InicioSesionAdmin">
+      <form [formGroup] ="EditarInfoUsuario">
         <div class="form-group">
-          <label for="exampleInputEmail1">Correo Electronico</label>
-          <input type="email" class="form-control" [ngClass]="{'input-error':correoA.invalid && (correoA.dirty || correoA.touched)}" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="correo" required>
-          <div *ngIf="correoA.invalid && (correoA.dirty || correoA.touched)" class="error">
-            <span *ngIf ="correoA.errors.required">Error el campo es obligatorio</span>
+          <label for="inputAddress">Usuario</label>
+          <input type="text" class="form-control" id="inputAddress"  [ngClass]="{'input-error':usuarioP.invalid && (usuarioP.dirty || usuarioP.touched)}" formControlName="usuario" required>
+          <div *ngIf="usuarioP.invalid && (usuarioP.dirty || usuarioP.touched)" class="error">
+            <span *ngIf ="usuarioP.errors.required">Error el campo es obligatorio</span>
           </div>
         </div>
         <div class="form-group">
-          <label for="Contraseña">Contraseña</label>
-          <input type="password" id="Contraseña" class="form-control" [ngClass]="{'input-error':contraA.invalid && (contraA.dirty || contraA.touched)}" formControlName="contra" required>
-          <div *ngIf="contraA.invalid && (contraA.dirty || contraA.touched)" class="error">
-            <span *ngIf ="contraA.errors.required">Error el campo es obligatorio</span>
+          <label for="exampleInputEmail1">Correo Electronico</label>
+          <input type="email" class="form-control" [ngClass]="{'input-error':correoP.invalid && (correoP.dirty || correoP.touched)}" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="correo" required>
+          <div *ngIf="correoP.invalid && (correoP.dirty || correoP.touched)" class="error">
+            <span *ngIf ="correoP.errors.required">Error el campo es obligatorio</span>
+          </div>
         </div>
+        <div class="form-group">
+          <label for="Contraseña">Nueva Contraseña</label>
+          <input type="password" id="Contraseña" class="form-control" placeholder="Ingrese la nueva contraseña" [ngClass]="{'input-error':contrasenaP.invalid && (contrasenaP.dirty || contrasenaP.touched)}" formControlName="contrasena" required>
+          <div *ngIf="contrasenaP.invalid && (contrasenaP.dirty || contrasenaP.touched)" class="error">
+            <span *ngIf ="contrasenaP.errors.required">Error el campo es obligatorio</span>
+          </div>
         </div>
-        <button [disabled]="!InicioSesionAdmin.valid" data-dismiss="modal" type="submit" class="btn btn-primary" (click)="loginAdmin()">Loguear</button>
+        <div class="form-group">
+          <label for="telefono">Telefono</label>
+          <input type="text" class="form-control" id="telefono"  [ngClass]="{'input-error':telefonoP.invalid && (telefonoP.dirty || telefonoP.touched)}" formControlName="telefono" required>
+          <div *ngIf="telefonoP.invalid && (telefonoP.dirty || telefonoP.touched)" class="error">
+            <span *ngIf ="telefonoP.errors.required">Error el campo es obligatorio</span>
+            <span *ngIf ="telefonoP.errors.minlength">El minimo permitido son 8 digitos</span>
+          </div>
+        </div>
+        <button [disabled]="!EditarInfoUsuario.valid" data-dismiss="modal" type="submit" class="btn btn-success"  (click)="editarInfoUsuario()">Editar Informacion</button>
       </form>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="cerrarModal()">Cancelar</button>
+    <button type="button" class="btn btn-outline-info" *ngIf="opcionPerfil != 0"  (click)="opcionPerfil = 0">Volver</button>
+    <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()">Cancelar</button>
   </div>
 </ng-template>

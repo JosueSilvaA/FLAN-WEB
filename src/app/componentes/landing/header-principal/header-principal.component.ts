@@ -14,10 +14,12 @@ import Swal from 'sweetalert2/src/sweetalert2.js'
 export class HeaderPrincipalComponent implements OnInit {
   token:string=null;
   usuario:string;
+  fotoPerfil:string='../../../../assets/img/perfil_default.jpg';
   public isMenuCollapsed = true;
   opcionPerfil:number=0;
   opcionPerfilInfo:number=0;
   opcionPerfilFoto:number=0;
+
   
   constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService) { }
 
@@ -26,17 +28,6 @@ export class HeaderPrincipalComponent implements OnInit {
     this.usuario = sessionStorage.getItem("USUARIO") 
   }
 
-  Toast:any = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    onOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  })
   
   InicioSesionUsuario = new FormGroup({
     correo : new FormControl('',[Validators.required,Validators.email]),
@@ -48,6 +39,12 @@ export class HeaderPrincipalComponent implements OnInit {
     contra : new FormControl('',[Validators.required])
   });
   
+  EditarInfoUsuario = new FormGroup({
+    correo : new FormControl('',[Validators.required,Validators.email]),
+    usuario : new FormControl('',[Validators.required]),
+    contrasena : new FormControl('',[Validators.required]),
+    telefono  : new FormControl('',[Validators.required,Validators.minLength(8)]),
+  });
 
   get correoN(){
     return this.InicioSesionUsuario.get('correo');
@@ -64,6 +61,34 @@ export class HeaderPrincipalComponent implements OnInit {
   get contraA(){
     return this.InicioSesionAdmin.get('contra');
   }
+
+  get correoP(){
+    return this.EditarInfoUsuario.get('correo');
+  }
+
+  get usuarioP(){
+    return this.EditarInfoUsuario.get('usuario');
+  }
+
+  get contrasenaP(){
+    return this.EditarInfoUsuario.get('contrasena');
+  }
+
+  get telefonoP(){
+    return this.EditarInfoUsuario.get('telefono');
+  }
+
+  Toast:any = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
 
   loginRegistrado():void{
      this.usuarioService.loginRegistrado(this.InicioSesionUsuario.value).subscribe(res=>{
@@ -118,8 +143,29 @@ export class HeaderPrincipalComponent implements OnInit {
 
   //////////////////////////////
   editarInfoUsuario(){
+    this.usuarioService.editarUsuario(this.EditarInfoUsuario.value)
+    .subscribe(res=>{
+      if(res.n==1){
+        this.usuarioService.obtenerUsuario(sessionStorage.getItem('ID')).subscribe(result=>{
+          this.usuario = result.usuario;
+          this.modalService.dismissAll();
+        });
+      }
+    })
+  }
+
+  //////////////////////////////
+
+  infoUsuarioLogueado():void{
+    
     this.opcionPerfilInfo=1;
     this.opcionPerfil=1;
+    this.usuarioService.obtenerUsuario(sessionStorage.getItem('ID')).subscribe(res=>{
+      console.log(res);
+      this.EditarInfoUsuario.controls['correo'].setValue(res.correo);
+      this.EditarInfoUsuario.controls['usuario'].setValue(res.usuario);
+      this.EditarInfoUsuario.controls['telefono'].setValue(res.telefono);
+    });
   }
 
   //MODALES DEL HEADER PRINCIPAL
@@ -148,7 +194,7 @@ export class HeaderPrincipalComponent implements OnInit {
     this.modalService.open(
       modal,
       {
-        size:'lg',
+        size:'md',
         centered:true
       }
     )

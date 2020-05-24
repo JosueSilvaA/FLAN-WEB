@@ -53,6 +53,14 @@ export class UsuarioService {
     return this.httpClient.get(`${this.URL_SERVER}/usuarios`);
   }
 
+  obtenerUsuario(id):Observable<any>{
+    return this.httpClient.get(`${this.URL_SERVER}/usuarios/${id}/usuario`)
+  }
+
+  editarUsuario(usuario):Observable<any>{
+    return this.httpClient.put(`${this.URL_SERVER}/usuarios/${sessionStorage.getItem('ID')}`,usuario);
+  }
+
   eliminarUsuario(usuario):Observable<any>{
     return this.httpClient.delete(`${this.URL_SERVER}/usuarios/${usuario}`)
   }
