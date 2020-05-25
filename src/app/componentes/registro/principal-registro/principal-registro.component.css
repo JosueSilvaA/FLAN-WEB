@@ -39,3 +39,51 @@
 .input-error{
     border-color: red;
 }
+@media (max-width:1800px){
+    .formulario{
+        margin-top: 20px;
+    }
+
+    .contenedor-formulario{
+        height: 120vh;
+    }
+}
+
+
+@media (max-width:1500px){
+    .formulario{
+        margin-top: 20px;
+    }
+
+    .contenedor-formulario{
+        height: 120vh;
+    }
+}
+
+
+@media (max-width:1200px){
+    .formulario{
+        margin-top: 20px;
+    }
+
+    .contenedor-formulario{
+        height: 120vh;
+    }
+}
+
+
+@media (max-width:992px){
+    .formulario{
+        margin-top: 20px;
+    }
+}
+
+@media (max-width:768px){
+    .formulario{
+        margin-top: 20px;
+    }
+
+    .contenedor-formulario{
+        height: 150vh;
+    }
+}

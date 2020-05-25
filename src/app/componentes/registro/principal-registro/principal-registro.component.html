@@ -11,7 +11,10 @@
                     <label for="inputAddress">Usuario</label>
                     <input type="text" class="form-control" id="inputAddress" placeholder="Ej:Jmark98" [ngClass]="{'input-error':usuario.invalid && (usuario.dirty || usuario.touched)}" formControlName="usuario" required>
                     <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="error">
-                      <span *ngIf ="usuario.errors.required">Error el campo es obligatorio</span>
+                      <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                      <span *ngIf ="usuario.errors.minlength">Se requieren mas caracteres</span>
+                      <span *ngIf ="usuario.errors.maxlength">Exceso de caracteres</span>
+                      <span *ngIf ="usuario.errors.required">El campo es obligatorio</span>
                     </div>
                   </div>
                   <div class="form-row">
@@ -19,14 +22,16 @@
                       <label for="nombres">Nombres</label>
                       <input type="text" class="form-control" id="nombres" placeholder="Daniel Enrique" [ngClass]="{'input-error':nombres.invalid && (nombres.dirty || nombres.touched)}" formControlName="nombres" required>
                       <div *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)" class="error">
-                        <span *ngIf ="nombres.errors.required">Error el campo es obligatorio</span>
+                        <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                        <span *ngIf ="nombres.errors.required">El campo es obligatorio</span>
                       </div>
                     </div>
                     <div class="form-group col-md-6">
                       <label for="apellidos">Apellidos</label>
                       <input type="text" class="form-control" id="apellidos" placeholder="Silva Aguirre" [ngClass]="{'input-error':apellidos.invalid && (apellidos.dirty || apellidos.touched)}" formControlName="apellidos" required>
                       <div *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)" class="error">
-                        <span *ngIf ="apellidos.errors.required">Error el campo es obligatorio</span>
+                        <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                        <span *ngIf ="apellidos.errors.required">El campo es obligatorio</span>
                       </div>
                     </div>
                   </div>
@@ -35,14 +40,21 @@
                       <label for="correoE">Correo Electronico</label>
                       <input type="email" class="form-control" id="correoE" placeholder="dani@gmail.com" [ngClass]="{'input-error':correo.invalid && (correo.dirty || correo.touched)}" formControlName="correo" required>
                       <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="error">
-                        <span *ngIf ="correo.errors.required">Error el campo es obligatorio</span>
+                        <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                        <span *ngIf ="correo.errors.required">El campo es obligatorio</span>
                       </div>
                     </div>
                     <div class="form-group col-md-6">
                       <label for="contrasenaU">Contraseña</label>
-                      <input type="password" class="form-control" id="contrasenaU" placeholder="********" [ngClass]="{'input-error':contrasena.invalid && (contrasena.dirty || contrasena.touched)}" formControlName="contrasena" required>
-                      <div *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)" class="error">
-                        <span *ngIf ="contrasena.errors.required">Error el campo es obligatorio</span>
+                      <div class="input-group ">
+                        <div class="input-group-prepend">
+                          <button class="input-group-text" id="basic-addon1" (click)="mostrarContrasena()"> <fa-icon class="icon mr-1" [icon]="faUnlock"></fa-icon></button>
+                        </div>
+                        <input type="password" class="form-control" id="contrasenaU" placeholder="********" [ngClass]="{'input-error':contrasena.invalid && (contrasena.dirty || contrasena.touched)}" formControlName="contrasena" id="pass" required >
+                        <div *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)" class="error">
+                          <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                          <span *ngIf ="contrasena.errors.required">El campo es obligatorio</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -50,14 +62,20 @@
                     <label for="direccion">Direccion</label>
                     <input type="text" class="form-control" id="direccion" placeholder="Tegucigalpa,Barrio Guanacaste" [ngClass]="{'input-error':direccion.invalid && (direccion.dirty || direccion.touched)}" formControlName="direccion" required>
                     <div *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)" class="error">
-                      <span *ngIf ="direccion.errors.required">Error el campo es obligatorio</span>
+                      <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                      <span *ngIf ="direccion.errors.minlength">Su direccion debe tener almenos 10 caracteres.</span>
+                      <span *ngIf ="direccion.errors.required">El campo es obligatorio.</span>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="telefono">Telefono</label>
                     <input type="text" class="form-control" id="telefono" placeholder="Ej:99345612" [ngClass]="{'input-error':telefono.invalid && (telefono.dirty || telefono.touched)}" formControlName="telefono" required>
                     <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="error">
-                      <span *ngIf ="telefono.errors.required">Error el campo es obligatorio</span>
+                      <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                      <span *ngIf ="telefono.errors.pattern">Solo ingrese numeros.</span>
+                      <span *ngIf ="telefono.errors.minlength">Se requieren mas caracteres.</span>
+                      <span *ngIf ="telefono.errors.maxlength">Exceso de caracteres.</span>
+                      <span *ngIf ="telefono.errors.required">El campo es obligatorio.</span>
                     </div>
                   </div>
                   <div class="boton-registrar">

@@ -8,7 +8,7 @@ import { AngularFireStorage } from '@angular/fire/storage'
 import { finalize } from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import { viewClassName } from '@angular/compiler';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+import { faExclamationTriangle,faUnlock } from '@fortawesome/free-solid-svg-icons'
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -23,7 +23,7 @@ export class HeaderPrincipalComponent implements OnInit {
 
   ///////ICONOS///////////////////
   faExclamation = faExclamationTriangle;
-
+  faUnlock = faUnlock
   ///////VARIABLES GLOBALES///////
   token:string=null;
   usuario:string;
@@ -47,6 +47,15 @@ export class HeaderPrincipalComponent implements OnInit {
     this.fotoPerfil=sessionStorage.getItem("FOTO"); 
   }
 
+  mostrarContrasena(){
+    let elemento :any = document.getElementById('pass');
+    if(elemento.type =='text'){
+      elemento.type = "password";
+    }else{
+      elemento.type = "text";
+    }
+    
+  }
   
   InicioSesionUsuario = new FormGroup({
     correo : new FormControl('',[Validators.required,Validators.email]),
@@ -64,6 +73,8 @@ export class HeaderPrincipalComponent implements OnInit {
     contrasena : new FormControl('',[Validators.required]),
     telefono  : new FormControl('',[Validators.required,Validators.minLength(8)]),
   });
+
+  
 
   get correoN(){
     return this.InicioSesionUsuario.get('correo');

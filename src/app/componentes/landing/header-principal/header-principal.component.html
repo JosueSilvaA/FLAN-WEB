@@ -123,10 +123,15 @@
           </div>
           <div class="form-group">
               <label for="Contraseña">Contraseña</label>
-              <input type="password" id="Contraseña" class="form-control" [ngClass]="{'input-error':contraN.invalid && (contraN.dirty || contraN.touched)}" formControlName="contra" required>
-              <div *ngIf="contraN.invalid && (contraN.dirty || contraN.touched)" class="error">
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <button class="input-group-text" id="basic-addon1" (click)="mostrarContrasena()"> <fa-icon class="icon mr-1" [icon]="faUnlock"></fa-icon></button>
+                </div>
+                <input type="password" id="Contraseña" class="form-control" [ngClass]="{'input-error':contraN.invalid && (contraN.dirty || contraN.touched)}" formControlName="contra" id="pass" required>
+                <div *ngIf="contraN.invalid && (contraN.dirty || contraN.touched)" class="error">
                   <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
                   <span *ngIf ="contraN.errors.required">El campo es obligatorio</span>
+                </div>
               </div>
           </div>
           <button [disabled]="!InicioSesionUsuario.valid" data-dismiss="modal"  type="submit" class="btn btn-primary" (click)="loginRegistrado()">Loguear</button>
@@ -157,11 +162,16 @@
           </div>
           <div class="form-group">
             <label for="Contraseña">Contraseña</label>
-            <input type="password" id="Contraseña" class="form-control" [ngClass]="{'input-error':contraA.invalid && (contraA.dirty || contraA.touched)}" formControlName="contra" required>
+            <div class="input-group ">
+              <div class="input-group-prepend">
+                <button class="input-group-text" id="basic-addon1" (click)="mostrarContrasena()"> <fa-icon class="icon mr-1" [icon]="faUnlock"></fa-icon></button>
+              </div>
+              <input type="password" id="Contraseña" class="form-control" [ngClass]="{'input-error':contraA.invalid && (contraA.dirty || contraA.touched)}" formControlName="contra" id="pass" required>
             <div *ngIf="contraA.invalid && (contraA.dirty || contraA.touched)" class="error">
               <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
               <span *ngIf ="contraA.errors.required">El campo es obligatorio</span>
           </div>
+            </div> 
           </div>
           <button [disabled]="!InicioSesionAdmin.valid" data-dismiss="modal" type="submit" class="btn btn-primary" (click)="loginAdmin()">Loguear</button>
         </form>

@@ -6,7 +6,7 @@
 .contenedor-header-registro{
     background:  #f9e79f ;
     width: 100%;
-    height: 9vh;
+    height: 80px;
 }
 
 .col-xl-4{
@@ -18,8 +18,16 @@
      
  }
 
+ .logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+
  .logo a{
      display: flex;
+     justify-content: center;
+     align-items: center;
  }
 
  .logo a p{
