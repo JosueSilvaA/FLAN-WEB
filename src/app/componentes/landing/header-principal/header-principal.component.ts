@@ -1,10 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ElementRef,ViewChild} from '@angular/core';
 import { FormControl,FormGroup,Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioService } from '../../../services/usuario.service'
 import Swal from 'sweetalert2/src/sweetalert2.js'
+import { AngularFireStorage } from '@angular/fire/storage'
+import { finalize } from 'rxjs/operators'
+import { Observable } from 'rxjs';
+import { viewClassName } from '@angular/compiler';
 
+interface HtmlInputEvent extends Event{
+  target: HTMLInputElement & EventTarget;
+}
 
 @Component({
   selector: 'app-header-principal',
@@ -14,18 +21,24 @@ import Swal from 'sweetalert2/src/sweetalert2.js'
 export class HeaderPrincipalComponent implements OnInit {
   token:string=null;
   usuario:string;
-  fotoPerfil:string='../../../../assets/img/perfil_default.jpg';
+  fotoPerfil:string;
   public isMenuCollapsed = true;
   opcionPerfil:number=0;
   opcionPerfilInfo:number=0;
   opcionPerfilFoto:number=0;
-
+  file : File;
+  fotoSelect:string | ArrayBuffer;
+  filePath:string
   
-  constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService) { }
+  constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService,private firestorage:AngularFireStorage) { }
+  @ViewChild('imagen') inputImageUser: ElementRef;
+  uploadPorcent: Observable<number>;
+  urlImage: Observable<string>;
 
   ngOnInit(): void {
     this.token = sessionStorage.getItem("ACCESS_TOKEN")
-    this.usuario = sessionStorage.getItem("USUARIO") 
+    this.usuario = sessionStorage.getItem("USUARIO")
+    this.fotoPerfil=sessionStorage.getItem("FOTO"); 
   }
 
   
@@ -137,7 +150,8 @@ export class HeaderPrincipalComponent implements OnInit {
   logout(){
     this.usuarioService.logout();
     this.token = sessionStorage.getItem("ACCESS_TOKEN")
-    this.usuario = sessionStorage.getItem("USUARIO") 
+    this.usuario = sessionStorage.getItem("USUARIO")
+    this.fotoPerfil = sessionStorage.getItem("FOTO"); 
     this.router.navigate(['/principal'])
   }
 
@@ -157,17 +171,51 @@ export class HeaderPrincipalComponent implements OnInit {
   //////////////////////////////
 
   infoUsuarioLogueado():void{
-    
+    this.opcionPerfilFoto=0;
     this.opcionPerfilInfo=1;
     this.opcionPerfil=1;
     this.usuarioService.obtenerUsuario(sessionStorage.getItem('ID')).subscribe(res=>{
-      console.log(res);
+      
       this.EditarInfoUsuario.controls['correo'].setValue(res.correo);
       this.EditarInfoUsuario.controls['usuario'].setValue(res.usuario);
       this.EditarInfoUsuario.controls['telefono'].setValue(res.telefono);
     });
   }
 
+  fotoUsuarioLogueado():void{
+    this.opcionPerfilFoto=2;
+    this.opcionPerfilInfo=0;
+    this.opcionPerfil=1;
+  }
+
+  fotoSeleccionada(event:HtmlInputEvent):void{
+    const id = Math.random().toString(36).substring(2);
+    if(event.target.files && event.target.files[0]){
+      this.file = event.target.files[0];
+      this.filePath = `multimedia/imagenes/imagen_${id}.png`;
+      const ref = this.firestorage.ref(this.filePath);
+      const task = this.firestorage.upload(this.filePath,this.file);
+      this.uploadPorcent = task.percentageChanges();
+      task.snapshotChanges().pipe( finalize(()=> this.urlImage = ref.getDownloadURL())).subscribe();
+      //imagen previa
+      const reader = new FileReader();
+      reader.onload = e => this.fotoSelect = reader.result;
+      reader.readAsDataURL(this.file);
+    }
+  }
+
+  editarFoto():void{
+    this.urlImage.subscribe(res=>{
+       this.usuarioService.editarFotoPerfil(res).subscribe(result=>{
+        this.usuarioService.obtenerUsuario(sessionStorage.getItem('ID')).subscribe(res=>{
+          this.fotoPerfil=res.foto_perfil;
+          this.modalService.dismissAll();
+        })    
+       })
+    })
+
+    
+  }
   //MODALES DEL HEADER PRINCIPAL
 
   abrirLogin(modal:any){
@@ -194,7 +242,7 @@ export class HeaderPrincipalComponent implements OnInit {
     this.modalService.open(
       modal,
       {
-        size:'md',
+        size:'xs',
         centered:true
       }
     )

@@ -16,7 +16,11 @@ import { PrincipalRegistroComponent } from './componentes/registro/principal-reg
 import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +42,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

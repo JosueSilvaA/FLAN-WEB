@@ -21,7 +21,7 @@ export class UsuarioService {
     pipe(tap(
       (res)=>{
         if(res){
-          this.guardarToken(res.accessToken,res.expiresIn,res.id,res.usuario);
+          this.guardarToken(res.accessToken,res.expiresIn,res.id,res.usuario,res.foto_perfil);
         }
       }
     ))
@@ -34,7 +34,7 @@ export class UsuarioService {
       (res)=>{
         if(res){
           console.log("respuesta",res)
-          this.guardarToken(res.accessToken,res.expiresIn,res.id,res.usuario);
+          this.guardarToken(res.accessToken,res.expiresIn,res.id,res.usuario,res.foto_perfil);
         }
       }
     ))
@@ -45,7 +45,8 @@ export class UsuarioService {
     sessionStorage.removeItem("ACCESS_TOKEN");
     sessionStorage.removeItem("USUARIO");
     sessionStorage.removeItem("ID");
-    sessionStorage.removeItem("EXPIRES_IN");;
+    sessionStorage.removeItem("EXPIRES_IN");
+    sessionStorage.removeItem("FOTO");
   }
 
   /////OPERACIONES CON EL USUARIO
@@ -61,6 +62,12 @@ export class UsuarioService {
     return this.httpClient.put(`${this.URL_SERVER}/usuarios/${sessionStorage.getItem('ID')}`,usuario);
   }
 
+  editarFotoPerfil(nuevaFoto):Observable<any>{
+    return this.httpClient.put(`${this.URL_SERVER}/usuarios/${sessionStorage.getItem('ID')}/fotoPerfil`,{
+      foto_perfil:nuevaFoto
+    });
+  }
+
   eliminarUsuario(usuario):Observable<any>{
     return this.httpClient.delete(`${this.URL_SERVER}/usuarios/${usuario}`)
   }
@@ -71,11 +78,12 @@ export class UsuarioService {
 
 
   //Gestion de los tokens
-  guardarToken(token:string,expiresIn:string,id:string,usuario:string):void{
+  guardarToken(token:string,expiresIn:string,id:string,usuario:string,foto:string):void{
     sessionStorage.setItem("ACCESS_TOKEN",token);
     sessionStorage.setItem("EXPIRES_IN",expiresIn);
     sessionStorage.setItem("USUARIO",usuario);
     sessionStorage.setItem("ID",id);
+    sessionStorage.setItem("FOTO",foto);
     this.token= token;
   }
 

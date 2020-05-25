@@ -45,7 +45,7 @@
             <a class="nav-link" routerLink="/registroUsuario">Registrarse</a>
         </li>
         <li class="nav-item" *ngIf="token !=null && usuario !=''"> 
-          <div *ngIf="fotoPerfil=='../../../../assets/img/perfil_default.jpg'" class="nav-link foto-perfil"><img src="{{fotoPerfil}}" alt="foto..perfil"></div>
+          <div  class="nav-link foto-perfil"><img [src]="fotoPerfil || '../../../../assets/img/perfil_default.jpg'" alt="foto..perfil"></div>
         </li>
         <li  *ngIf="token !=null && usuario !=''" ngbDropdown class="nav-item">
           
@@ -176,7 +176,7 @@
   <div class="modal-body">
     <div *ngIf="opcionPerfil==0" class="opciones-edicion">
       <button class="btn btn-outline-warning mr-2" (click)="infoUsuarioLogueado()">Editar Informacion</button>
-      <button class="btn btn-outline-dark mr-2">Editar Imagen</button>
+      <button class="btn btn-outline-dark mr-2" (click)="fotoUsuarioLogueado()">Editar Imagen</button>
     </div>
     <div *ngIf="(opcionPerfil!=0 && opcionPerfilInfo==1)">
       <form [formGroup] ="EditarInfoUsuario">
@@ -212,9 +212,27 @@
         <button [disabled]="!EditarInfoUsuario.valid" data-dismiss="modal" type="submit" class="btn btn-success"  (click)="editarInfoUsuario()">Editar Informacion</button>
       </form>
     </div>
+    <div *ngIf="(opcionPerfil!=0 && opcionPerfilFoto==2)" class="justify-content-center contenedor-foto"> 
+      <input type="file" accept=".png, .jpg" class="d-none" (change)="fotoSeleccionada($event)" #fotoInput>
+      <div class="contenedor-foto-perfil">
+        <p>Seleccione una foto</p>
+        <img [src]="fotoSelect || '../../../../assets/img/no-image.png'" class="img-fluid" alt="foto perfil" (click)="fotoInput.click()">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar"  [style.width]="(uploadPorcent | async) + '%'">
+          </div>
+        </div>
+        <input #imagen type="hidden" [value]="urlImage | async">
+        <br>
+        <button *ngIf="urlImage | async;else btnDisable" type="button" class="btn btn-outline-success" (click)="editarFoto()">Editar Foto</button>
+        <ng-template #btnDisable>
+          <button  type="button" class="btn btn-secondary" disabled=true (click)="editarFoto()">Editar Foto</button>
+        </ng-template>
+      </div>
+     
+    </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-info" *ngIf="opcionPerfil != 0"  (click)="opcionPerfil = 0">Volver</button>
+    <button type="button" class="btn btn-outline-info" *ngIf="opcionPerfil != 0" (click)='urlImage=null' (click)="fotoSelect=''"  (click)="opcionPerfil = 0" >Volver</button>
     <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()">Cancelar</button>
   </div>
 </ng-template>

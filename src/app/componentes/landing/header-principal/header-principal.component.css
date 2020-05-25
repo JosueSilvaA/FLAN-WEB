@@ -101,11 +101,30 @@
     margin: 0px;
     padding: 0px;
     width: 40px;
-    height: auto;
-    border-radius: 50%;
+    height: 40px;
+    border: 1px solid black;
 }
 
 .foto-perfil img{
     width: 100%;
-    border-radius: 50%;
+    height: 100%;
+    border-radius: 30px;
+}
+.contenedor-foto{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.contenedor-foto-perfil{
+    text-align: center;
+}
+
+.contenedor-foto-perfil img{
+    cursor: pointer;
+    width: 100%;
+}
+
+.contenedor-foto-perfil button{
+    width: 100%;
 }
