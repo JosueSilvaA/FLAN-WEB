@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  firebase :{
+  firebase : {
     apiKey: "AIzaSyDqGvzZzBm88_drSv9e1xhKLfjMkmLFEOU",
     authDomain: "flan-file.firebaseapp.com",
     databaseURL: "https://flan-file.firebaseio.com",

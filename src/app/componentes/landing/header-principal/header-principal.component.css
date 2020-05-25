@@ -102,7 +102,6 @@
     padding: 0px;
     width: 40px;
     height: 40px;
-    border: 1px solid black;
 }
 
 .foto-perfil img{
@@ -127,4 +126,12 @@
 
 .contenedor-foto-perfil button{
     width: 100%;
+}
+
+.nombre-usuario{
+    min-width: 120px;
+}
+
+.dropdown-toggle::after{
+    content: none;
 }

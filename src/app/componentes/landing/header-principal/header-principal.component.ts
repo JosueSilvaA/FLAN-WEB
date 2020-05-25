@@ -8,6 +8,7 @@ import { AngularFireStorage } from '@angular/fire/storage'
 import { finalize } from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import { viewClassName } from '@angular/compiler';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -19,6 +20,11 @@ interface HtmlInputEvent extends Event{
   styleUrls: ['./header-principal.component.css']
 })
 export class HeaderPrincipalComponent implements OnInit {
+
+  ///////ICONOS///////////////////
+  faExclamation = faExclamationTriangle;
+
+  ///////VARIABLES GLOBALES///////
   token:string=null;
   usuario:string;
   fotoPerfil:string;
@@ -29,9 +35,9 @@ export class HeaderPrincipalComponent implements OnInit {
   file : File;
   fotoSelect:string | ArrayBuffer;
   filePath:string
+  ////////////////////////////////
   
   constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService,private firestorage:AngularFireStorage) { }
-  @ViewChild('imagen') inputImageUser: ElementRef;
   uploadPorcent: Observable<number>;
   urlImage: Observable<string>;
 
@@ -113,7 +119,8 @@ export class HeaderPrincipalComponent implements OnInit {
        }else{
 
          this.token=this.usuarioService.getToken();
-         this.usuario = sessionStorage.getItem("USUARIO")
+         this.usuario = sessionStorage.getItem("USUARIO");
+         this.fotoPerfil = sessionStorage.getItem("FOTO");
          this.router.navigate(['/blog']);
          this.modalService.dismissAll();
          this.Toast.fire({
@@ -134,7 +141,8 @@ export class HeaderPrincipalComponent implements OnInit {
         })
       }else{
         this.token=this.usuarioService.getToken();
-        this.usuario = sessionStorage.getItem("USUARIO")
+        this.usuario = sessionStorage.getItem("USUARIO");
+        this.fotoPerfil = sessionStorage.getItem("FOTO");
         this.router.navigate(['/herramientas']);
         this.modalService.dismissAll();
         this.Toast.fire({
@@ -152,7 +160,8 @@ export class HeaderPrincipalComponent implements OnInit {
     this.token = sessionStorage.getItem("ACCESS_TOKEN")
     this.usuario = sessionStorage.getItem("USUARIO")
     this.fotoPerfil = sessionStorage.getItem("FOTO"); 
-    this.router.navigate(['/principal'])
+    this.fotoSelect = sessionStorage.getItem("FOTO");
+    this.router.navigate(['/principal']);
   }
 
   //////////////////////////////
@@ -208,8 +217,11 @@ export class HeaderPrincipalComponent implements OnInit {
     this.urlImage.subscribe(res=>{
        this.usuarioService.editarFotoPerfil(res).subscribe(result=>{
         this.usuarioService.obtenerUsuario(sessionStorage.getItem('ID')).subscribe(res=>{
+
           this.fotoPerfil=res.foto_perfil;
+          sessionStorage.setItem("FOTO",this.fotoPerfil);
           this.modalService.dismissAll();
+
         })    
        })
     })
