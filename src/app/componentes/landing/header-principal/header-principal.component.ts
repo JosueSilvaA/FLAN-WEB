@@ -1,4 +1,4 @@
-import { Component, OnInit ,ElementRef,ViewChild} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl,FormGroup,Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -7,7 +7,6 @@ import Swal from 'sweetalert2/src/sweetalert2.js'
 import { AngularFireStorage } from '@angular/fire/storage'
 import { finalize } from 'rxjs/operators'
 import { Observable } from 'rxjs';
-import { viewClassName } from '@angular/compiler';
 import { faExclamationTriangle,faUnlock } from '@fortawesome/free-solid-svg-icons'
 
 interface HtmlInputEvent extends Event{
