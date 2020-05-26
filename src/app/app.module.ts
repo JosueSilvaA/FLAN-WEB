@@ -20,6 +20,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
+import { AdmininistracionComponent } from './componentes/admininistracion/admininistracion.component';
+
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import { environment } from 'src/environments/environment';
     HerramientasComponent,
     PrincipalComponent,
     HeaderRegistroComponent,
-    PrincipalRegistroComponent
+    PrincipalRegistroComponent,
+    AdmininistracionComponent
   ],
   imports: [
     BrowserModule,

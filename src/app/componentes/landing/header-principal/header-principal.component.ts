@@ -42,9 +42,15 @@ export class HeaderPrincipalComponent implements OnInit {
   urlImage: Observable<string>;
 
   ngOnInit(): void {
-    this.token = sessionStorage.getItem("ACCESS_TOKEN")
-    this.usuario = sessionStorage.getItem("USUARIO")
-    this.fotoPerfil=sessionStorage.getItem("FOTO"); 
+      this.token = sessionStorage.getItem("ACCESS_TOKEN")
+      console.log(this.token)
+      if(this.token== 'undefined'){
+        this.token = null;
+      }else{
+        this.token = sessionStorage.getItem("ACCESS_TOKEN")
+        this.usuario = sessionStorage.getItem("USUARIO")
+        this.fotoPerfil=sessionStorage.getItem("FOTO"); 
+      }
   }
 
   mostrarContrasena(){
@@ -154,7 +160,7 @@ export class HeaderPrincipalComponent implements OnInit {
         this.token=this.usuarioService.getToken();
         this.usuario = sessionStorage.getItem("USUARIO");
         this.fotoPerfil = sessionStorage.getItem("FOTO");
-        this.router.navigate(['/herramientas']);
+        this.router.navigate(['/admin']);
         this.modalService.dismissAll();
         this.Toast.fire({
           icon: 'success',

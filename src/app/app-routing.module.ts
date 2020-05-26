@@ -5,6 +5,7 @@ import { PrincipalComponent } from './componentes/landing/principal/principal.co
 import { HerramientasComponent } from './componentes/landing/herramientas/herramientas.component';
 import { BlogComponent } from './componentes/landing/blog/blog.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
+import { AdmininistracionComponent } from './componentes/admininistracion/admininistracion.component';
 
 const routes: Routes = [
   {path:'',component:LandingComponent,
@@ -15,7 +16,12 @@ const routes: Routes = [
       {path:'blog',component:BlogComponent}
     ]
   },
-  {path:'registroUsuario',component:RegistroComponent}
+  {path:'registroUsuario',component:RegistroComponent},
+  {path: 'admin',component: AdmininistracionComponent,
+    children:[
+      
+    ]
+  }
 ];
 
 @NgModule({
