@@ -62,20 +62,37 @@ export class UsuarioService {
     return this.httpClient.put(`${this.URL_SERVER}/usuarios/${sessionStorage.getItem('ID')}`,usuario);
   }
 
+  editarUsuarioAdmin(id,usuario):Observable<any>{
+    return this.httpClient.put(`${this.URL_SERVER}/usuarios/${id}/admin`,usuario);
+  }
+
+  editarFotoPerfilAdmin(id,nuevaFoto):Observable<any>{
+    return this.httpClient.put(`${this.URL_SERVER}/usuarios/${id}/fotoPerfil`,{
+      foto_perfil:nuevaFoto
+    });
+  }
+
   editarFotoPerfil(nuevaFoto):Observable<any>{
     return this.httpClient.put(`${this.URL_SERVER}/usuarios/${sessionStorage.getItem('ID')}/fotoPerfil`,{
       foto_perfil:nuevaFoto
     });
   }
 
-  eliminarUsuario(usuario):Observable<any>{
-    return this.httpClient.delete(`${this.URL_SERVER}/usuarios/${usuario}`)
+  eliminarUsuario(idUsuario):Observable<any>{
+    return this.httpClient.delete(`${this.URL_SERVER}/usuarios/${idUsuario}`)
   }
 
   registrarUsuario(usuario):Observable<any>{
     return this.httpClient.post(`${this.URL_SERVER}/usuarios`,usuario);
   }
 
+  obtenerUsuariosPorRol(rol:string):Observable<any>{
+    return this.httpClient.get(`${this.URL_SERVER}/usuarios/${rol}`);
+  }
+
+  obtenerRoles():Observable<any>{
+    return this.httpClient.get(`${this.URL_SERVER}/roles`);
+  }
 
   //Gestion de los tokens
   guardarToken(token:string,expiresIn:string,id:string,usuario:string,foto:string):void{

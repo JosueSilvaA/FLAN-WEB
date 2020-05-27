@@ -1,109 +1,175 @@
 <div class="container-fluid">
     <h3 class="titulos-categoria-admin mt-3">USUARIOS DEL SISTEMA</h3>
     <hr class="bg-dark" style="color: #444444;">
-        <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" activeIds="ngb-panel-1">
-            <ngb-panel title="Simple" class="prueba">
-              <ng-template ngbPanelContent >
+    <div class="row">
+      <div class="col-xl-12 mb-4">
+        <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
+          <ngb-panel >
+            <ng-template ngbPanelTitle >
+              <b (click)="prueba()">Usuarios Administradores</b>
+            </ng-template>
+            <ng-template ngbPanelContent >
+              <div class="tablas">
+                <table class="table table-hover  table-dark">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Foto</th>
+                      <th scope="col">Nombres</th>
+                      <th scope="col">Apellidos</th>
+                      <th scope="col">Correo</th>
+                      <th scope="col">Usuario</th>
+                      <th scope="col">Direccion</th>
+                      <th scope="col">Telefono</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  *ngFor="let usuario of usuariosAdmins; let i = index">
+                      <th scope="row">{{i+1}}</th>
+                      <td><img style="width: 30px; height: 30px;" src="{{usuario.foto_perfil}}" alt="foto perfil"></td>
+                      <td>{{usuario.nombres}}</td>
+                      <td>{{usuario.apellidos}}</td>
+                      <td>{{usuario.correo}}</td>
+                      <td>{{usuario.usuario}}</td>
+                      <td>{{usuario.direccion}}</td>
+                      <td>{{usuario.telefono}}</td>
+                      <td><fa-icon class="icon mr-4 crud" [icon]="faTrashAlt"></fa-icon><fa-icon class="icon crud" [icon]="faPenAlt"></fa-icon></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>
+      <div class="col-xl-12">
+        <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
+          <ngb-panel title="Usuarios Registrados">
+            <ng-template ngbPanelContent>
+              <div class="tablas">
                 <table class="table table-hover  table-dark ">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                    </tbody>
-                  </table>
-              </ng-template>
-            </ngb-panel>
-            <ngb-panel>
-              <ng-template ngbPanelTitle>
-                <span>&#9733; <b>Fancy</b> title &#9733;</span>
-              </ng-template>
-              <ng-template ngbPanelContent>
-                <table class="table table-responsive table-hover">
-                    <thead>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>john@example.com</td>
-                        </tr>
-                        <tr>
-                            <td>Smith</td>
-                            <td>Thomas</td>
-                            <td>smith@example.com</td>
-                        </tr>
-                        <tr>
-                            <td>Merry</td>
-                            <td>Jim</td>
-                            <td>merry@example.com</td>
-                        </tr>
-                    </tbody>
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Foto</th>
+                      <th scope="col">Nombres</th>
+                      <th scope="col">Apellidos</th>
+                      <th scope="col">Correo</th>
+                      <th scope="col">Usuario</th>
+                      <th scope="col">Direccion</th>
+                      <th scope="col">Telefono</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  *ngFor="let usuario of usuariosRegistrados; let i = index">
+                      <th scope="row">{{i+1}}</th>
+                      <td><img style="width: 30px; height: 30px;" src="{{usuario.foto_perfil}}" alt="foto perfil"></td>
+                      <td>{{usuario.nombres}}</td>
+                      <td>{{usuario.apellidos}}</td>
+                      <td>{{usuario.correo}}</td>
+                      <td>{{usuario.usuario}}</td>
+                      <td>{{usuario.direccion}}</td>
+                      <td>{{usuario.telefono}}</td>
+                      <td>
+                        <fa-icon class="icon mr-4 crud" [icon]="faTrashAlt" (click)="eliminarUsuario(usuario._id)" ></fa-icon>
+                        <fa-icon class="icon mr-4 crud" [icon]="faPenAlt" (click)="infoUsuarioSeleccionado(usuario._id)" (click)=" abrirEditarPerfil(modalEditarUsuario)" ></fa-icon>
+                        <fa-icon class="icon crud" [icon]="faCamera" (click)="fotoUsuarioSeleccionado(usuario._id)"  (click)=" abrirEditarPerfil(modalEditarFotoUsuario)"></fa-icon>
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
-              </ng-template>
-            </ngb-panel>
-            <ngb-panel title="Disabled" [disabled]="true">
-              <ng-template ngbPanelContent>
-                <table class="table table-responsive table-hover">
-                    <thead>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>john@example.com</td>
-                        </tr>
-                        <tr>
-                            <td>Smith</td>
-                            <td>Thomas</td>
-                            <td>smith@example.com</td>
-                        </tr>
-                        <tr>
-                            <td>Merry</td>
-                            <td>Jim</td>
-                            <td>merry@example.com</td>
-                        </tr>
-                    </tbody>
-                </table>
-              </ng-template>
-            </ngb-panel>
-          </ngb-accordion>
-
-    
-    
+              </div>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>
+      <div class="col-xl-12"></div>
+    </div>
 </div>
+<!--(click)=" abrirEditarPerfil(modalEditarUsuario)"-->
+<ng-template #modalEditarUsuario let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Editar Usuario</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <form [formGroup] ="EditarInfoUsuario">
+        <div class="form-group">
+          <label for="inputAddress">Usuario</label>
+          <input type="text" class="form-control" id="inputAddress"  [ngClass]="{'input-error':usuarioP.invalid && (usuarioP.dirty || usuarioP.touched)}" formControlName="usuario" required>
+          <div *ngIf="usuarioP.invalid && (usuarioP.dirty || usuarioP.touched)" class="error">
+            <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+            <span *ngIf ="usuarioP.errors.required">El campo es obligatorio</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Correo Electronico</label>
+          <input type="email" class="form-control" [ngClass]="{'input-error':correoP.invalid && (correoP.dirty || correoP.touched)}" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="correo" required>
+          <div *ngIf="correoP.invalid && (correoP.dirty || correoP.touched)" class="error">
+            <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+            <span *ngIf ="correoP.errors.required">El campo es obligatorio</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="direccion">Direccion</label>
+          <input type="text" class="form-control" id="direccion" [ngClass]="{'input-error':direccionP.invalid && (direccionP.dirty || direccionP.touched)}" formControlName="direccion" required>
+          <div *ngIf="direccionP.invalid && (direccionP.dirty || direccionP.touched)" class="error">
+            <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+            <span *ngIf ="direccionP.errors.minlength">Su direccion debe tener almenos 10 caracteres.</span>
+            <span *ngIf ="direccionP.errors.required">El campo es obligatorio.</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="telefono">Telefono</label>
+          <input type="text" class="form-control" id="telefono"  [ngClass]="{'input-error':telefonoP.invalid && (telefonoP.dirty || telefonoP.touched)}" formControlName="telefono" required>
+          <div *ngIf="telefonoP.invalid && (telefonoP.dirty || telefonoP.touched)" class="error">
+            <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+            <span *ngIf ="telefonoP.errors.required">El campo es obligatorio</span>
+            <span *ngIf ="telefonoP.errors.minlength">El minimo permitido son 8 digitos</span>
+          </div>
+        </div>
+        <button [disabled]="!EditarInfoUsuario.valid" data-dismiss="modal" type="submit" class="btn btn-success"  (click)="editarInfoUsuario()">Editar Informacion</button>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()">Cancelar</button>
+  </div>
+</ng-template>
 
-
+<ng-template #modalEditarFotoUsuario let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Editar Foto Usuario</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div  class="justify-content-center contenedor-foto"> 
+      <input type="file" accept=".png, .jpg" class="d-none" (change)="fotoSeleccionada($event)" #fotoInput>
+      <div class="contenedor-foto-perfil">
+        <p>Seleccione una foto</p>
+        <img [src]="fotoSelect || '../../../../assets/img/no-image.png'" class="img-fluid" alt="foto perfil" (click)="fotoInput.click()">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar"  [style.width]="(uploadPorcent | async) + '%'">
+          </div>
+        </div>
+        <input #imagen type="hidden" [value]="urlImage | async">
+        <br>
+        <button *ngIf="urlImage | async;else btnDisable" type="button" class="btn btn-outline-success" (click)="editarFoto()">Editar Foto</button>
+        <ng-template #btnDisable>
+          <button  type="button" class="btn btn-secondary" disabled=true (click)="editarFoto()">Editar Foto</button>
+        </ng-template>
+      </div>
+    </div>
+  </div> 
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()">Cancelar</button>
+  </div>
+</ng-template>
 

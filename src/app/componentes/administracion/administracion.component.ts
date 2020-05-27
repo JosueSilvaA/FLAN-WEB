@@ -172,7 +172,7 @@ export class AdministracionComponent implements OnInit {
           this.fotoPerfil=res.foto_perfil;
           sessionStorage.setItem("FOTO",this.fotoPerfil);
           this.modalService.dismissAll();
-
+          this.router.navigate(['/admin'])
         })    
        })
     }) 
