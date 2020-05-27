@@ -37,7 +37,7 @@
         <li *ngIf="token ==null" ngbDropdown class="nav-item">
           <a href (click)="false" class="nav-link" ngbDropdownToggle>Inicio Sesion</a>
           <div ngbDropdownMenu>
-              <button ngbDropdownItem (click)="abrirLogin(modalLoginUsuario)">Usuario</button>
+              <button ngbDropdownItem (click)="abrirLogin(modalLoginUsuario)">Usuario Registrado</button>
               <button ngbDropdownItem (click)="abrirLogin(modalLoginAdmin)">Administrador</button>
           </div>
         </li>
@@ -52,8 +52,9 @@
           <a href (click)="false" class="nav-link perfil" ngbDropdownToggle>{{usuario}}</a>
           <div ngbDropdownMenu class="opciones-perfil">
             <button ngbDropdownItem (click)="abrirEditarPerfil(modalEditarPerfil)">Editar Perfil</button>
+            <button *ngIf="tipoUsuario==2" ngbDropdownItem routerLink="/admin">Admin</button>
               <div class="dropdown-divider"></div>
-              <button ngbDropdownItem (click)="logout()">Cerrar Sesion</button>
+            <button ngbDropdownItem (click)="logout()">Cerrar Sesion</button>
           </div>
         </li>
       </ul>

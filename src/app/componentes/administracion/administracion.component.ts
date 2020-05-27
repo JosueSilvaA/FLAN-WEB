@@ -17,11 +17,11 @@ interface HtmlInputEvent extends Event{
 
 
 @Component({
-  selector: 'app-admininistracion',
-  templateUrl: './admininistracion.component.html',
-  styleUrls: ['./admininistracion.component.css']
+  selector: 'app-administracion',
+  templateUrl: './administracion.component.html',
+  styleUrls: ['./administracion.component.css']
 })
-export class AdmininistracionComponent implements OnInit {
+export class AdministracionComponent implements OnInit {
 
   ///ICONOS DEL COMPONENTE
   faUser= faUser;
@@ -52,7 +52,6 @@ export class AdmininistracionComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = sessionStorage.getItem("ACCESS_TOKEN")
-      console.log(this.token)
       if(this.token== 'undefined'){
         this.token = null;
         this.router.navigate(['/'])
@@ -192,4 +191,5 @@ export class AdmininistracionComponent implements OnInit {
   cerrarModal(){
     this.modalService.dismissAll();
   }
+
 }

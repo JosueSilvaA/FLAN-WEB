@@ -2,14 +2,14 @@
 
     <!-- Sidebar -->
     <div *ngIf="cambio==0" class="bg-dark border-dark" id="sidebar-wrapper">
-      <div class="sidebar-heading ml-2">
+      <div class="sidebar-heading ml-2" routerLink="/admin">
         <img width="45px" height="45px" src="../../../assets/img/logoProyecto.png" alt="FLAN">
         <p class="logo ml-2">FLAN</p>
       </div>
       <hr class="bg-gray">
 
       <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action bg-dark"><fa-icon class="icon mr-2" [icon]="faUser"></fa-icon>Usuarios</a>
+        <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/usuarios"><fa-icon class="icon mr-2" [icon]="faUser"></fa-icon>Usuarios</a>
         <a href="#" class="list-group-item list-group-item-action bg-dark"><fa-icon class="icon mr-2" [icon]="faPhotoVideo"></fa-icon>Medios</a>
         <a href="#" class="list-group-item list-group-item-action bg-dark"><fa-icon class="icon mr-2" [icon]="faFileCode"></fa-icon>Paginas</a>
         <a href="#" class="list-group-item list-group-item-action bg-dark"><fa-icon class="icon mr-2" [icon]="faComments"></fa-icon>Comentarios</a>
@@ -44,17 +44,18 @@
             </li>
             <li class="nav-item mr-3">
               <a class="nav-link" routerLink="/herramientas"><fa-icon class="icon mr-2" [icon]="faPalette"></fa-icon></a>
-            </li>      
+            </li>
           </ul>
           <ul ngbNav #nav="ngbNav"  class=" justify-content-center ml-auto">
-            <li class="nav-item" *ngIf="token !=null && usuario !=''"> 
+            <li class="nav-item" *ngIf="token !=null && usuario !=''">
               <div  class="nav-link foto-perfil"><img [src]="fotoPerfil || '../../../../assets/img/perfil_default.jpg'" alt="foto..perfil"></div>
             </li>
             <li  *ngIf="token !=null && usuario !=''" ngbDropdown class="nav-item nombre-usuario">
-              
+
               <a href (click)="false" class="nav-link perfil" ngbDropdownToggle>{{usuario}}</a>
               <div ngbDropdownMenu class="opciones-perfil">
                 <button ngbDropdownItem (click)="abrirEditarPerfil(modalEditarPerfil)">Editar Perfil</button>
+                <button ngbDropdownItem routerLink="/">Principal</button>
                   <div class="dropdown-divider"></div>
                   <button ngbDropdownItem (click)="logout()">Cerrar Sesion</button>
               </div>
@@ -64,17 +65,18 @@
       </nav>
 
       <div class="container-fluid">
-        <h1 class="mt-4">Simple Sidebar</h1>
+        <!-- <h1 class="mt-4">Simple Sidebar</h1>
         <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
-        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p>
-        <!-- <router-outlet></router-outlet> -->
+        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p> -->
+        <router-outlet></router-outlet>
       </div>
     </div>
+
     <!-- /#page-content-wrapper -->
 
   </div>
 
-  
+
 <ng-template #modalEditarPerfil let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">{{usuario}}</h4>
@@ -125,7 +127,7 @@
         <button [disabled]="!EditarInfoUsuario.valid" data-dismiss="modal" type="submit" class="btn btn-success"  (click)="editarInfoUsuario()">Editar Informacion</button>
       </form>
     </div>
-    <div *ngIf="(opcionPerfil!=0 && opcionPerfilFoto==2)" class="justify-content-center contenedor-foto"> 
+    <div *ngIf="(opcionPerfil!=0 && opcionPerfilFoto==2)" class="justify-content-center contenedor-foto">
       <input type="file" accept=".png, .jpg" class="d-none" (change)="fotoSeleccionada($event)" #fotoInput>
       <div class="contenedor-foto-perfil">
         <p>Seleccione una foto</p>
@@ -141,7 +143,7 @@
           <button  type="button" class="btn btn-secondary" disabled=true (click)="editarFoto()">Editar Foto</button>
         </ng-template>
       </div>
-     
+
     </div>
   </div>
   <div class="modal-footer">

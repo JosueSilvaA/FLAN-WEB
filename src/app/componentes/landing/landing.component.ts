@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FooterPrincipalComponent } from './footer-principal/footer-principal.component';
 
 @Component({
   selector: 'app-landing',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-
+  @ViewChild('footer') footerComponent:FooterPrincipalComponent;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  estadoSesion(estado){
+    console.log('Estado de la sesion ahorita ',estado);
+    this.footerComponent.bienvenida(estado);
   }
 
 }

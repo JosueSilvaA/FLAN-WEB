@@ -1,0 +1,109 @@
+<div class="container-fluid">
+    <h3 class="titulos-categoria-admin mt-3">USUARIOS DEL SISTEMA</h3>
+    <hr class="bg-dark" style="color: #444444;">
+        <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" activeIds="ngb-panel-1">
+            <ngb-panel title="Simple" class="prueba">
+              <ng-template ngbPanelContent >
+                <table class="table table-hover  table-dark ">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                      </tr>
+                    </tbody>
+                  </table>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <span>&#9733; <b>Fancy</b> title &#9733;</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <table class="table table-responsive table-hover">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John</td>
+                            <td>Doe</td>
+                            <td>john@example.com</td>
+                        </tr>
+                        <tr>
+                            <td>Smith</td>
+                            <td>Thomas</td>
+                            <td>smith@example.com</td>
+                        </tr>
+                        <tr>
+                            <td>Merry</td>
+                            <td>Jim</td>
+                            <td>merry@example.com</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel title="Disabled" [disabled]="true">
+              <ng-template ngbPanelContent>
+                <table class="table table-responsive table-hover">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John</td>
+                            <td>Doe</td>
+                            <td>john@example.com</td>
+                        </tr>
+                        <tr>
+                            <td>Smith</td>
+                            <td>Thomas</td>
+                            <td>smith@example.com</td>
+                        </tr>
+                        <tr>
+                            <td>Merry</td>
+                            <td>Jim</td>
+                            <td>merry@example.com</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
+
+    
+    
+</div>
+
+
+

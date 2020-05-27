@@ -20,7 +20,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
-import { AdmininistracionComponent } from './componentes/admininistracion/admininistracion.component';
+import { AdministracionComponent } from './componentes/administracion/administracion.component';
+import { PanelPrincipalComponent } from './componentes/administracion/panel-principal/panel-principal.component';
+import { AdminUsuariosComponent } from './componentes/administracion/admin-usuarios/admin-usuarios.component';
+import { AdminMediosComponent } from './componentes/administracion/admin-medios/admin-medios.component';
+import { AdminPaginasComponent } from './componentes/administracion/admin-paginas/admin-paginas.component';
+import { AdminTemasComponent } from './componentes/administracion/admin-temas/admin-temas.component';
 
 
 
@@ -36,7 +41,12 @@ import { AdmininistracionComponent } from './componentes/admininistracion/admini
     PrincipalComponent,
     HeaderRegistroComponent,
     PrincipalRegistroComponent,
-    AdmininistracionComponent
+    AdministracionComponent,
+    PanelPrincipalComponent,
+    AdminUsuariosComponent,
+    AdminMediosComponent,
+    AdminPaginasComponent,
+    AdminTemasComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,27 @@
+.titulos-categoria-admin{
+    font-weight: bold;
+    color: #444444;
+    font-size: larger;
+}
+
+.prueba{
+    border: 3px solid black;
+}
+
+table{
+    margin: 0px;
+}
+
+thead{
+    width: 100%;
+}
+
+ngb-accordion::ng-deep.card::ng-deep
+
+  .card-body{
+    color: #666666;
+    padding: 0px;
+  }
+  
+  
+  

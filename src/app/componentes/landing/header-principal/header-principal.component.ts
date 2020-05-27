@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl,FormGroup,Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,7 +19,7 @@ interface HtmlInputEvent extends Event{
   styleUrls: ['./header-principal.component.css']
 })
 export class HeaderPrincipalComponent implements OnInit {
-
+  @Output() estadoLogueado = new EventEmitter();
   ///////ICONOS///////////////////
   faExclamation = faExclamationTriangle;
   faUnlock = faUnlock
@@ -27,6 +27,7 @@ export class HeaderPrincipalComponent implements OnInit {
   token:string=null;
   usuario:string;
   fotoPerfil:string;
+  tipoUsuario:number=1;
   public isMenuCollapsed = true;
   opcionPerfil:number=0;
   opcionPerfilInfo:number=0;
@@ -34,6 +35,7 @@ export class HeaderPrincipalComponent implements OnInit {
   file : File;
   fotoSelect:string | ArrayBuffer;
   filePath:string
+  estadoSesion:number =  0;
   ////////////////////////////////
   
   constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService,private firestorage:AngularFireStorage) { }
@@ -42,13 +44,20 @@ export class HeaderPrincipalComponent implements OnInit {
 
   ngOnInit(): void {
       this.token = sessionStorage.getItem("ACCESS_TOKEN")
-      console.log(this.token)
-      if(this.token== 'undefined'){
+      console.log('El token ',this.token)
+      if(this.token== 'undefined' || this.token == null){
         this.token = null;
       }else{
         this.token = sessionStorage.getItem("ACCESS_TOKEN")
         this.usuario = sessionStorage.getItem("USUARIO")
         this.fotoPerfil=sessionStorage.getItem("FOTO"); 
+        this.usuarioService.obtenerUsuario(sessionStorage.getItem('ID')).subscribe(result=>{
+          if(result.rol == '5ebb4bf7033d1300171f926d'){
+            this.tipoUsuario = 1;
+          }else{
+            this.tipoUsuario = 2;
+          }
+        });
       }
   }
 
@@ -133,7 +142,8 @@ export class HeaderPrincipalComponent implements OnInit {
           title: `${res.mensaje}`
         })
        }else{
-
+         this.estadoSesion = 1;
+         this.estadoLogueado.emit(this.estadoSesion);
          this.token=this.usuarioService.getToken();
          this.usuario = sessionStorage.getItem("USUARIO");
          this.fotoPerfil = sessionStorage.getItem("FOTO");
@@ -150,29 +160,34 @@ export class HeaderPrincipalComponent implements OnInit {
   loginAdmin():void{
     this.usuarioService.loginAdmin(this.InicioSesionAdmin.value).subscribe(res=>{
       if(res.mensaje){
-        console.log(res.mensaje);
+        
         this.Toast.fire({
           icon: 'error',
           title: `${res.mensaje}`
         })
       }else{
+        this.estadoSesion = 1;
+        this.estadoLogueado.emit(this.estadoSesion);
         this.token=this.usuarioService.getToken();
         this.usuario = sessionStorage.getItem("USUARIO");
         this.fotoPerfil = sessionStorage.getItem("FOTO");
         this.router.navigate(['/admin']);
         this.modalService.dismissAll();
+        this.tipoUsuario=2;
         this.Toast.fire({
           icon: 'success',
           title: `Bienvenido ${res.usuario}`
         })
         this.InicioSesionAdmin.reset();
-        console.log(this.usuarioService.getToken());
+
       }
     });
   }
   
   logout(){
     this.usuarioService.logout();
+    this.estadoSesion = 0;
+    this.estadoLogueado.emit(this.estadoSesion);
     this.token = sessionStorage.getItem("ACCESS_TOKEN")
     this.usuario = sessionStorage.getItem("USUARIO")
     this.fotoPerfil = sessionStorage.getItem("FOTO"); 
