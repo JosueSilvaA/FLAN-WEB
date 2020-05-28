@@ -57,9 +57,15 @@ export class AdministracionComponent implements OnInit {
         this.token = null;
         this.router.navigate(['/'])
       }else{
-        this.token = sessionStorage.getItem("ACCESS_TOKEN")
-        this.usuario = sessionStorage.getItem("USUARIO")
-        this.fotoPerfil=sessionStorage.getItem("FOTO"); 
+        this.usuarioService.obtenerUsuario(sessionStorage.getItem("ID")).subscribe(res=>{
+          this.token = sessionStorage.getItem("ACCESS_TOKEN")
+          sessionStorage.setItem("USUARIO",res.usuario);
+          sessionStorage.setItem("FOTO",res.foto_perfil);
+          this.usuario = sessionStorage.getItem("USUARIO")
+          this.fotoPerfil=sessionStorage.getItem("FOTO"); 
+        });
+        
+        
       }
   }
 

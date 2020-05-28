@@ -94,6 +94,11 @@ export class UsuarioService {
     return this.httpClient.get(`${this.URL_SERVER}/roles`);
   }
 
+  cambiarRol(idUsuario,rol):Observable<any>{
+    return this.httpClient.put(`${this.URL_SERVER}/usuarios/${idUsuario}/rol`,{
+      rol:rol
+    });
+  }
   //Gestion de los tokens
   guardarToken(token:string,expiresIn:string,id:string,usuario:string,foto:string):void{
     sessionStorage.setItem("ACCESS_TOKEN",token);

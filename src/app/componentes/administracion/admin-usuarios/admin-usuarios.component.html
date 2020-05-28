@@ -40,7 +40,12 @@
                       <td>{{usuario.usuario}}</td>
                       <td>{{usuario.direccion}}</td>
                       <td>{{usuario.telefono}}</td>
-                      <td><fa-icon class="icon mr-4 crud" [icon]="faTrashAlt"></fa-icon><fa-icon class="icon crud" [icon]="faPenAlt"></fa-icon></td>
+                      <td>
+                        <fa-icon class="icon mr-4 crud" [icon]="faTrashAlt" (click)="eliminarUsuario(usuario._id)" ></fa-icon>
+                        <fa-icon class="icon mr-4 crud" [icon]="faPenAlt" (click)="infoUsuarioSeleccionado(usuario._id)" (click)=" abrirEditarPerfil(modalEditarUsuario)" ></fa-icon>
+                        <fa-icon class="icon mr-4 crud" [icon]="faCamera" (click)="fotoUsuarioSeleccionado(usuario._id)"  (click)=" abrirEditarPerfil(modalEditarFotoUsuario)"></fa-icon>
+                        <fa-icon class="icon crud" [icon]="faExchangeAlt" (click)="setUsuarioSeleccionado(usuario._id)" (click)=" abrirEditarPerfil(modalCambiarRol)"></fa-icon>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -49,7 +54,7 @@
           </ngb-panel>
         </ngb-accordion>
       </div>
-      <div class="col-xl-12">
+      <div class="col-xl-12 mb-4">
         <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-1" >
           <ngb-panel title="Usuarios Registrados">
             <ng-template ngbPanelContent>
@@ -81,7 +86,8 @@
                       <td>
                         <fa-icon class="icon mr-4 crud" [icon]="faTrashAlt" (click)="eliminarUsuario(usuario._id)" ></fa-icon>
                         <fa-icon class="icon mr-4 crud" [icon]="faPenAlt" (click)="infoUsuarioSeleccionado(usuario._id)" (click)=" abrirEditarPerfil(modalEditarUsuario)" ></fa-icon>
-                        <fa-icon class="icon crud" [icon]="faCamera" (click)="fotoUsuarioSeleccionado(usuario._id)"  (click)=" abrirEditarPerfil(modalEditarFotoUsuario)"></fa-icon>
+                        <fa-icon class="icon mr-4 crud" [icon]="faCamera" (click)="fotoUsuarioSeleccionado(usuario._id)"  (click)=" abrirEditarPerfil(modalEditarFotoUsuario)"></fa-icon>
+                        <fa-icon class="icon crud" [icon]="faExchangeAlt" (click)="setUsuarioSeleccionado(usuario._id)" (click)=" abrirEditarPerfil(modalCambiarRol)"></fa-icon>
                       </td>
                     </tr>
                   </tbody>
@@ -91,7 +97,95 @@
           </ngb-panel>
         </ngb-accordion>
       </div>
-      <div class="col-xl-12"></div>
+      <div class="col-xl-6 mb-5">
+        <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-1" >
+          <ngb-panel title="Registrar Usuario">
+            <ng-template ngbPanelContent>
+              <div class="registroUsuario dark p-3">
+                <form [formGroup] ="RegistroUsuario">
+                    <div>
+                      <h4>REGISTRO USUARIO</h4><hr>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputAddress">Usuario</label>
+                      <input type="text" class="form-control" id="inputAddress" placeholder="Ej:Jmark98" [ngClass]="{'input-error':usuario.invalid && (usuario.dirty || usuario.touched)}" formControlName="usuario" required>
+                      <div *ngIf="usuario.invalid && (usuario.dirty || usuario.touched)" class="error">
+                        <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                        <span *ngIf ="usuario.errors.minlength">Se requieren mas caracteres</span>
+                        <span *ngIf ="usuario.errors.maxlength">Exceso de caracteres</span>
+                        <span *ngIf ="usuario.errors.required">El campo es obligatorio</span>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="nombres">Nombres</label>
+                        <input type="text" class="form-control" id="nombres" placeholder="Daniel Enrique" [ngClass]="{'input-error':nombres.invalid && (nombres.dirty || nombres.touched)}" formControlName="nombres" required>
+                        <div *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)" class="error">
+                          <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                          <span *ngIf ="nombres.errors.required">El campo es obligatorio</span>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" class="form-control" id="apellidos" placeholder="Silva Aguirre" [ngClass]="{'input-error':apellidos.invalid && (apellidos.dirty || apellidos.touched)}" formControlName="apellidos" required>
+                        <div *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)" class="error">
+                          <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                          <span *ngIf ="apellidos.errors.required">El campo es obligatorio</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="correoE">Correo Electronico</label>
+                        <input type="email" class="form-control" id="correoE" placeholder="dani@gmail.com" [ngClass]="{'input-error':correo.invalid && (correo.dirty || correo.touched)}" formControlName="correo" required>
+                        <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="error">
+                          <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                          <span *ngIf ="correo.errors.required">El campo es obligatorio</span>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="contrasenaU">Contraseña</label>
+                        <div class="input-group ">
+                          <div class="input-group-prepend">
+                            <button class="input-group-text" id="basic-addon1" (click)="mostrarContrasena()"> <fa-icon class="icon mr-1" [icon]="faUnlock"></fa-icon></button>
+                          </div>
+                          <input type="password" class="form-control" id="contrasenaU" placeholder="********" [ngClass]="{'input-error':contrasena.invalid && (contrasena.dirty || contrasena.touched)}" formControlName="contrasena" id="pass" required >
+                          <div *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)" class="error">
+                            <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                            <span *ngIf ="contrasena.errors.required">El campo es obligatorio</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="direccion">Direccion</label>
+                      <input type="text" class="form-control" id="direccion" placeholder="Tegucigalpa,Barrio Guanacaste" [ngClass]="{'input-error':direccion.invalid && (direccion.dirty || direccion.touched)}" formControlName="direccion" required>
+                      <div *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)" class="error">
+                        <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                        <span *ngIf ="direccion.errors.minlength">Su direccion debe tener almenos 10 caracteres.</span>
+                        <span *ngIf ="direccion.errors.required">El campo es obligatorio.</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="telefono">Telefono</label>
+                      <input type="text" class="form-control" id="telefono" placeholder="Ej:99345612" [ngClass]="{'input-error':telefono.invalid && (telefono.dirty || telefono.touched)}" formControlName="telefono" required>
+                      <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="error">
+                        <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                        <span *ngIf ="telefono.errors.pattern">Solo ingrese numeros.</span>
+                        <span *ngIf ="telefono.errors.minlength">Se requieren mas caracteres.</span>
+                        <span *ngIf ="telefono.errors.maxlength">Exceso de caracteres.</span>
+                        <span *ngIf ="telefono.errors.required">El campo es obligatorio.</span>
+                      </div>
+                    </div>
+                    <div class="boton-registrar">
+                      <button [disabled]="!RegistroUsuario.valid" type="submit" class="btn btn-primary" (click)="registrar()">Registrar</button>
+                    </div>
+                  </form>
+              </div>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>
     </div>
 </div>
 <!--(click)=" abrirEditarPerfil(modalEditarUsuario)"-->
@@ -176,6 +270,22 @@
   </div> 
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()">Cancelar</button>
+  </div>
+</ng-template>
+
+<ng-template #modalCambiarRol let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Cambiar el Rol</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>¿Desea realizar esta accion?</p>
+  </div> 
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()">Cancelar</button>
+    <button type="button" class="btn btn-outline-success" (click)="cambiarRol()">Aceptar</button>
   </div>
 </ng-template>
 
