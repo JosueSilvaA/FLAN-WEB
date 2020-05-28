@@ -22,7 +22,8 @@ interface HtmlInputEvent extends Event{
   styleUrls: ['./administracion.component.css']
 })
 export class AdministracionComponent implements OnInit {
-
+  
+  
   ///ICONOS DEL COMPONENTE
   faUser= faUser;
   faPhotoVideo = faPhotoVideo;

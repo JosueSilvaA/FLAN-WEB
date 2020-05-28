@@ -14,12 +14,14 @@ interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
 }
 
+
 @Component({
   selector: 'app-admin-usuarios',
   templateUrl: './admin-usuarios.component.html',
   styleUrls: ['./admin-usuarios.component.css']
 })
 export class AdminUsuariosComponent implements OnInit {
+
   /////////
   faTrashAlt = faTrashAlt;
   faPenAlt = faPenAlt;
@@ -35,7 +37,7 @@ export class AdminUsuariosComponent implements OnInit {
   rolUsuarioRegistrado:string;
   rolUsuarioAdmin:string;
   usuarioSeleccionado:string;
-
+  alerta = 1;
   ////////////////////////
   opcionPerfil:number=0;
   opcionPerfilInfo:number=0;

@@ -1,5 +1,11 @@
 <div class="container-fluid">
     <h3 class="titulos-categoria-admin mt-3">USUARIOS DEL SISTEMA</h3>
+    <div *ngIf="alerta==1" class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>Seleccione una opcion</strong> para que aparezca la informacion.
+      <button (click)="alerta=0" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
     <hr class="bg-dark" style="color: #444444;">
     <div class="row">
       <div class="col-xl-12 mb-4">
@@ -44,7 +50,7 @@
         </ngb-accordion>
       </div>
       <div class="col-xl-12">
-        <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
+        <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-1" >
           <ngb-panel title="Usuarios Registrados">
             <ng-template ngbPanelContent>
               <div class="tablas">

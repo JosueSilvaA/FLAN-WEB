@@ -6,6 +6,7 @@
 
 .prueba{
     border: 3px solid black;
+    color: brown;
 }
 
 table{
@@ -63,6 +64,7 @@ thead{
 .contenedor-foto-perfil button{
   width: 100%;
 }
+
 
 
 ngb-accordion::ng-deep.card::ng-deep
