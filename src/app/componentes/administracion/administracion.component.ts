@@ -7,8 +7,7 @@ import Swal from 'sweetalert2/src/sweetalert2.js'
 import { AngularFireStorage } from '@angular/fire/storage'
 import { finalize } from 'rxjs/operators'
 import { Observable } from 'rxjs';
-import { faExclamationTriangle,faUnlock } from '@fortawesome/free-solid-svg-icons'
-import { faUser,faPhotoVideo,faFileCode,faComments,faPalette,faArrowAltCircleLeft,faArrowAltCircleRight,faExclamation } from '@fortawesome/free-solid-svg-icons'
+import { faUser,faPhotoVideo,faFileCode,faComments,faPalette,faArrowAltCircleLeft,faArrowAltCircleRight,faExclamation,faBookReader,faFileInvoice } from '@fortawesome/free-solid-svg-icons'
 
 
 interface HtmlInputEvent extends Event{
@@ -33,6 +32,8 @@ export class AdministracionComponent implements OnInit {
   faArrowAltCircleLeft = faArrowAltCircleLeft;
   faArrowAltCircleRight = faArrowAltCircleRight
   faExclamation = faExclamation;
+  faBookReader = faBookReader;
+  faFileInvoice = faFileInvoice;
   //////////////////////////
   token:string=null;
   usuario:string;

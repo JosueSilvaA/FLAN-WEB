@@ -1,0 +1,27 @@
+.titulos-categoria-admin{
+    font-weight: bold;
+    color: #444444;
+    font-size: larger;
+}
+
+ngb-accordion::ng-deep.card::ng-deep
+  .card-body{
+    color: #666666;
+    padding: 0px;
+  }
+
+ngb-accordion::ng-deep.card::ng-deep
+  .card-header{
+    background-color:    #d5d8dc  ;
+  }
+  
+ngb-accordion::ng-deep.card::ng-deep
+  .btn{
+    color:#444444;
+    text-decoration: none;
+  }
+
+ngb-accordion::ng-deep.card::ng-deep
+  .btn:focus{
+      box-shadow: 0 0 0 .2rem rgba(1, 15, 31, 0.25);
+  }

@@ -10,10 +10,11 @@
 
       <div class="list-group list-group-flush">
         <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/usuarios"><fa-icon class="icon mr-2" [icon]="faUser"></fa-icon>Usuarios</a>
-        <a href="#" class="list-group-item list-group-item-action bg-dark"><fa-icon class="icon mr-2" [icon]="faPhotoVideo"></fa-icon>Medios</a>
-        <a href="#" class="list-group-item list-group-item-action bg-dark"><fa-icon class="icon mr-2" [icon]="faFileCode"></fa-icon>Paginas</a>
-        <a href="#" class="list-group-item list-group-item-action bg-dark"><fa-icon class="icon mr-2" [icon]="faComments"></fa-icon>Comentarios</a>
-        <a href="#" class="list-group-item list-group-item-action bg-dark"><fa-icon class="icon mr-2" [icon]="faPalette"></fa-icon>Temas</a>
+        <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/medios"><fa-icon class="icon mr-2" [icon]="faPhotoVideo"></fa-icon>Medios</a>
+        <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/pagina-principal"><fa-icon class="icon mr-2" [icon]="faFileInvoice"></fa-icon>Pagina Principal</a>
+        <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/paginas-informativas"><fa-icon class="icon mr-2" [icon]="faFileCode"></fa-icon>Pag. Informativas</a>
+        <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/posts"><fa-icon class="icon mr-2" [icon]="faBookReader"></fa-icon>Posts</a>
+        <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/temas"><fa-icon class="icon mr-2" [icon]="faPalette"></fa-icon>Temas</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -31,19 +32,22 @@
         <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
           <ul ngbNav #nav="ngbNav"  class="justify-content-center navbar-nav opciones-admin">
             <li ngbDropdown class="nav-item ml-3 mr-3">
-                <a href (click)="false" class="nav-link" ngbDropdownToggle><fa-icon class="icon mr-2" [icon]="faUser"></fa-icon></a>
+                <a class="nav-link" ngbDropdownToggle routerLink="/admin/usuarios"><fa-icon class="icon mr-2" [icon]="faUser"></fa-icon></a>
             </li>
             <li  class="nav-item mr-3">
-                <a class="nav-link" routerLink="/herramientas"><fa-icon class="icon mr-2" [icon]="faPhotoVideo"></fa-icon></a>
+                <a class="nav-link" routerLink="/admin/medios"><fa-icon class="icon mr-2" [icon]="faPhotoVideo"></fa-icon></a>
             </li>
             <li class="nav-item mr-3">
-              <a class="nav-link" routerLink="/herramientas"><fa-icon class="icon mr-2" [icon]="faFileCode"></fa-icon></a>
+              <a class="nav-link" routerLink="/admin/pagina-principal"><fa-icon class="icon mr-2" [icon]="faFileInvoice"></fa-icon></a>
             </li>
             <li class="nav-item mr-3">
-              <a class="nav-link" routerLink="/herramientas"><fa-icon class="icon mr-2" [icon]="faComments"></fa-icon></a>
+              <a class="nav-link" routerLink="/admin/paginas-informativas"><fa-icon class="icon mr-2" [icon]="faFileCode"></fa-icon></a>
             </li>
             <li class="nav-item mr-3">
-              <a class="nav-link" routerLink="/herramientas"><fa-icon class="icon mr-2" [icon]="faPalette"></fa-icon></a>
+              <a class="nav-link" routerLink="/admin/posts"><fa-icon class="icon mr-2" [icon]="faBookReader"></fa-icon></a>
+            </li>
+            <li class="nav-item mr-3">
+              <a class="nav-link" routerLink="/admin/temas"><fa-icon class="icon mr-2" [icon]="faPalette"></fa-icon></a>
             </li>
           </ul>
           <ul ngbNav #nav="ngbNav"  class=" justify-content-center ml-auto">
