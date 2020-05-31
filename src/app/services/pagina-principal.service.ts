@@ -18,3 +18,4 @@ export class PaginaPrincipalService {
     return this.httpClient.put(`${this.URL_SERVER}/paginaPrincipal/${idPagina}`,infoNueva);
   }
 }
+
