@@ -4,6 +4,60 @@
     font-size: larger;
 }
 
+.container-fluid{
+  padding: 0px;
+}
+
+.res-usuarios{
+  width: 100%;
+  min-height: 40px;
+  margin: 0px;
+}
+
+.cant-usuarios{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+.det-usuarios{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.num-usuarios{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: #444444;
+  font-size: 20px;
+  color: #d5d8dc;
+  border-radius: 25px;
+  cursor:default;
+}
+
+.total-usuarios{
+  display: flex;
+  justify-content: center;
+}
+
+.total-usuarios p{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.bordes{
+  border: 0.1px solid #444444;
+}
+
+.iconos{
+  font-size: 35px;
+}
+
 ngb-accordion::ng-deep.card::ng-deep
   .card-body{
     color: #666666;

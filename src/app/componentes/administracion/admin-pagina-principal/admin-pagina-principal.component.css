@@ -1,0 +1,64 @@
+table{
+  margin: 0px;
+}
+
+thead{
+  font-size: 18px;
+}
+
+.tablas{
+  text-align: center;
+}
+
+.iconos{
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.img-pag{
+  min-height: 100px;
+}
+.contenedor-fotos{
+  display: flex;
+}
+
+.contenedor-foto{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.contenedor-foto-perfil{
+  text-align: center;
+}
+
+.contenedor-foto-perfil img{
+  cursor: pointer;
+  max-width: 150px;
+  min-width: 150px;
+  max-height: 150px;
+  min-height: 150px;
+}
+
+ngb-accordion::ng-deep.card::ng-deep
+  .card-body{
+    color: #666666;
+    padding: 0px;
+  }
+
+ngb-accordion::ng-deep.card::ng-deep
+  .card-header{
+    background-color:    #d5d8dc  ;
+  }
+  
+ngb-accordion::ng-deep.card::ng-deep
+  .btn{
+    color:#444444;
+    text-decoration: none;
+    font-size: 22px;
+  }
+
+ngb-accordion::ng-deep.card::ng-deep
+  .btn:focus{
+      box-shadow: 0 0 0 .2rem rgba(1, 15, 31, 0.25);
+  }
