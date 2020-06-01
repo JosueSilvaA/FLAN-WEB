@@ -8,6 +8,11 @@ thead{
 
 .tablas{
   text-align: center;
+
+}
+
+.container-fluid{
+  overflow-x: auto;
 }
 
 .iconos{
@@ -40,6 +45,42 @@ thead{
   min-height: 150px;
 }
 
+.contenedor-nueva-foto img{
+  cursor: pointer;
+}
+
+.contenedor-imagenes{
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  background-color:  #eaecee ;
+}
+
+hr{
+  margin-bottom: 0px;
+  
+} 
+
+
+.iconos-gestion{
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.card-img-top{
+  background-size: cover;
+  background-position: center center;
+
+}
+
+.gestion-imagen{
+  display: flex;
+  justify-content: center;
+}
+
+.dark{
+  background-color: #eaecee ;
+}
 ngb-accordion::ng-deep.card::ng-deep
   .card-body{
     color: #666666;
@@ -61,4 +102,92 @@ ngb-accordion::ng-deep.card::ng-deep
 ngb-accordion::ng-deep.card::ng-deep
   .btn:focus{
       box-shadow: 0 0 0 .2rem rgba(1, 15, 31, 0.25);
+  }
+
+
+  @media (max-width:1500px){
+    .card-img-top{
+      background-size: cover;
+      background-position: center center;
+    }
+
+    thead{
+      font-size: 15px;
+    }
+    
+  }
+
+  @media (max-width:1200px){
+    .card-img-top{
+      background-size: cover;
+      background-position: center center;
+    }
+
+    thead{
+      font-size: 15px;
+    }
+
+    tbody{
+      font-size: 12px;
+    }
+    
+  }
+
+  @media (max-width:997px){
+    .card-img-top{
+      background-size: cover;
+      background-position: center center;
+    }
+
+    thead{
+      font-size: 15px;
+    }
+
+    tbody{
+      font-size: 13px;
+    }
+
+    .card-text{
+      font-size: 14px;
+    }
+    
+  }
+
+  
+  @media (max-width:778px){
+    .card-img-top{
+      background-size: cover;
+      background-position: center center;
+    }
+
+    thead{
+      font-size: 15px;
+    }
+
+    tbody{
+      font-size: 11px;
+    }
+    
+    .c{
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .card-title{
+      text-align: center;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .card-text{
+      font-size: 13px;
+    }
+
+    ngb-accordion::ng-deep.card::ng-deep
+      .btn{
+        color:#444444;
+        text-decoration: none;
+        font-size: 18px;
+      }
   }

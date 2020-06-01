@@ -83,9 +83,9 @@
                 <div class="row">
                   <ul class="list-group col-xl-12">
                     <li class="list-group-item">Titulo:        {{paginaPrincipal.titulo}}</li>
-                    <li class="list-group-item">Logo : <img width="40px" height="40px" src="../../../../assets/img/icono (2).png" alt=""></li>
+                    <li class="list-group-item">Logo : <img width="40px" height="40px" [src]="paginaPrincipal.logo || '../../../../assets/img/icono.png'" alt=""></li>
                     <li class="list-group-item">Descripcion : {{paginaPrincipal.descripcion}}</li>
-                    <li class="list-group-item">Favicon : <img width="40px" height="40px"  src="../../../../assets/img/icono.png" alt=""></li>
+                    <li class="list-group-item">Favicon : <img width="40px" height="40px"  [src]="paginaPrincipal.favicon || '../../../../assets/img/icono.png'" alt=""></li>
                     <li class="list-group-item">Visibilidad : {{paginaPrincipal.visibilidad}}</li>
                     <li class="list-group-item">Imagenes : {{paginaPrincipal.imagenes.length}} <fa-icon class="icon ml-2 iconos" [icon]="faImage"></fa-icon></li>
                   </ul>

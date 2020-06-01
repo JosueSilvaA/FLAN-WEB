@@ -1,13 +1,17 @@
 <div class="container-fluid footer">
     <div class="row">
-        <div class="col-xl-9">
+        <div *ngIf="piePagina == undefined" class="col-xl-9">
             <p>Derechos Reservados 2020 FLAN-CO.</p>
+        </div>
+        <div *ngIf="piePagina != undefined" class="col-xl-9">
+            <p>{{piePagina}}.</p>
         </div>
         <div class="col-xl-3 redes-sociales">
             <div class="contenedor-social">
                 <a href="https://github.com/JosueSilvaA/FLAN-WEB" target="_blank"><fa-icon class="icon-github" [icon]="faGithub"></fa-icon></a>
                 <button *ngIf="logueado == 0" class="btn btn-warning" routerLink="/registroUsuario" type="button">UNETE A NUESTRO SERVICIO</button>
-                <button *ngIf="logueado == 1" class="btn btn-outline-warning" href="https://github.com/JosueSilvaA/FLAN-WEB" type="button">BIENVENIDO A FLAN</button>
+                <button *ngIf="logueado == 1 && titulo == undefined" class="btn btn-outline-warning" href="https://github.com/JosueSilvaA/FLAN-WEB" type="button">BIENVENIDO A FLAN</button>
+                <button *ngIf="logueado == 1 && titulo != undefined" class="btn btn-outline-warning" href="https://github.com/JosueSilvaA/FLAN-WEB" type="button">BIENVENIDO A {{titulo}}</button>
             </div>
         </div>
     </div>

@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="col-xl-2 logo">
     <a class="navbar-brand" routerLink="/principal">
-      <img width="45px" height="45px" src="../../../assets/img/logoProyecto.png" alt="FLAN">
-      <p class="logo">FLAN</p>
+      <img width="45px" style="border-radius: 25px;" height="45px" [src]="logoPaginaPrincipal || '../../../assets/img/logoProyecto.png'" alt="FLAN">
+      <p class="logo">{{tituloPaginaPrincipal || 'FLAN'}}</p>
     </a>
     <button class="navbar-toggler btn-navbar" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
       &#9776;

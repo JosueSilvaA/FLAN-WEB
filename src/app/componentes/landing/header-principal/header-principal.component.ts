@@ -8,6 +8,7 @@ import { AngularFireStorage } from '@angular/fire/storage'
 import { finalize } from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import { faExclamationTriangle,faUnlock } from '@fortawesome/free-solid-svg-icons'
+import { PaginaPrincipalService } from './../../../services/pagina-principal.service';
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -37,12 +38,18 @@ export class HeaderPrincipalComponent implements OnInit {
   filePath:string
   estadoSesion:number =  0;
   ////////////////////////////////
-  
-  constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService,private firestorage:AngularFireStorage) { }
+  tituloPaginaPrincipal:any;
+  logoPaginaPrincipal:any;
+  ////////////////////////////////
+  constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService,private firestorage:AngularFireStorage,private paginaPrincipalService:PaginaPrincipalService) { }
   uploadPorcent: Observable<number>;
   urlImage: Observable<string>;
 
   ngOnInit(): void {
+    this.paginaPrincipalService.obtenerPaginaPrincipal().subscribe(res=>{
+      this.tituloPaginaPrincipal = res.titulo;
+      this.logoPaginaPrincipal = res.logo;
+    });
       this.token = sessionStorage.getItem("ACCESS_TOKEN")
       console.log('El token ',this.token)
       if(this.token== 'undefined' || this.token == null){

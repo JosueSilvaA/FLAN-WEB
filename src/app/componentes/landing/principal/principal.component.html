@@ -1,7 +1,12 @@
 <!------------MENSAJE INTRODUCCION--------------->
-<div class="fondo">
+<div *ngIf="(fondoPrincipal == undefined)" class="fondo">
     <div class="mensaje">
-        <p class="frase"> ¡Diseña tu propio Universo!</p>
+        <p class="frase"> {{descripcionPaginaPrincipal||'¡Diseña tu propio Universo!'}}</p>
+    </div>
+</div>
+<div *ngIf="(fondoPrincipal != undefined) " class="fondo" [style.background-image]="sanitizeImage(fondoPrincipal)">
+    <div class="mensaje">
+        <p class="frase"> {{descripcionPaginaPrincipal||'¡Diseña tu propio Universo!'}}</p>
     </div>
 </div>
 <!------------MENSAJE INTRODUCCION----------->
@@ -35,7 +40,10 @@
 <!--------FIN--CATEGORIAS----------->
 <div class="container-fluid contenedor-testimonial">
     <div class="row">
-        <div class="col-xl-6 foto-testimonial">
+        <div *ngIf="(fondoTestimonial == undefined)" class="col-xl-6 foto-testimonial">
+            <p>TESTIMONIALES</p>
+        </div>
+        <div *ngIf="(fondoTestimonial != undefined)" [style.background-image]="sanitizeImage(fondoTestimonial)" class="col-xl-6 foto-testimonial">
             <p>TESTIMONIALES</p>
         </div>
         <div class="col-xl-6 testimonial">
