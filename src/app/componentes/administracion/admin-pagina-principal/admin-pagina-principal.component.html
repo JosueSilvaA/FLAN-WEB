@@ -73,7 +73,14 @@
                 </ngb-panel>
             </ngb-accordion>
         </div>
+       
         <div class="col-xl-12 col-lg-12 mb-5">
+          <div *ngIf="alerta==1" class="alert alert-warning alert-dismissible fade show " role="alert">
+            <strong>¡IMPORTANTE!</strong> Para que pueda editar imagenes en la pagina principal debe existir la imagen con nombre Principal y Testimonial sino habra imagenes por defecto en la pagina principal.
+            <button (click)="alerta=0" type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
             <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
                 <ngb-panel >
                     <ng-template ngbPanelTitle >

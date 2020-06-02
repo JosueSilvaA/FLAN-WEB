@@ -14,12 +14,15 @@ export class PrincipalComponent implements OnInit {
   faBusinessTime = faBusinessTime;
   faUserSecret = faUserSecret;
   faScroll = faScroll;
-  
-  constructor(private paginaPrincipalService:PaginaPrincipalService,private _sanitizer: DomSanitizer) { }
+  public load: boolean;
+  constructor(private paginaPrincipalService:PaginaPrincipalService,private _sanitizer: DomSanitizer) {
+    this.load = false;
+   }
 
   ///////////////////////////
   descripcionPaginaPrincipal:any;
   imagenesPrincipales:any;
+  imagenesSecundarias:any = [];
   fondoPrincipal:any;
   fondoTestimonial:any;
   ngOnInit(): void {
@@ -30,6 +33,10 @@ export class PrincipalComponent implements OnInit {
       this.experimento();
       console.log(this.fondoPrincipal);
       console.log(this.fondoTestimonial);
+      console.log("SECUNDARIAS ",this.imagenesSecundarias);
+      setTimeout(() => {
+        this.load = true;
+      }, 3000);
     });
   }
 
@@ -41,6 +48,10 @@ export class PrincipalComponent implements OnInit {
 
       if (this.imagenesPrincipales[index].nombreImagen =='Testimonial'){
         this.fondoTestimonial = this.imagenesPrincipales[index].url;
+      }
+
+      if(this.imagenesPrincipales[index].nombreImagen !='Testimonial' && this.imagenesPrincipales[index].nombreImagen !='Principal'){
+        this.imagenesSecundarias.push(this.imagenesPrincipales[index]);
       }
     }
   }

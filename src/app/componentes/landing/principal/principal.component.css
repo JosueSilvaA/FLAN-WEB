@@ -77,6 +77,33 @@
 .icon{
     font-size: 30px;
 }
+
+.contenedor-galeria{
+    background-color:  #a2d9ce ;
+}
+
+.contenedor-imagenes-secundarias{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.contenedor-galeria h3{
+    height: 80px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.galeria{
+    border: 1px solid black;
+    width: 100%;
+    height: auto;
+}
+
+.galeria img{
+    width: 100%;
+    height: 100%;
+}
+
 @media (max-width: 1200px){
     .tarjeta-testimoniales{
         padding-top: 10px;

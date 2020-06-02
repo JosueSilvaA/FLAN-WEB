@@ -27,6 +27,7 @@ export class AdminPaginaPrincipalComponent implements OnInit {
   faImages = faImages;
   //////////////////////////////////
   alerta:number = 1;
+  alerta2:number = 2;
   //////////////////////////////////
   paginaPrincipal:any;
   imagenes:any = [];

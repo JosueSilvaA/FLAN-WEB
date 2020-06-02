@@ -1,84 +1,104 @@
+<div *ngIf="load">
 <!------------MENSAJE INTRODUCCION--------------->
-<div *ngIf="(fondoPrincipal == undefined)" class="fondo">
-    <div class="mensaje">
-        <p class="frase"> {{descripcionPaginaPrincipal||'¡Diseña tu propio Universo!'}}</p>
-    </div>
-</div>
-<div *ngIf="(fondoPrincipal != undefined) " class="fondo" [style.background-image]="sanitizeImage(fondoPrincipal)">
-    <div class="mensaje">
-        <p class="frase"> {{descripcionPaginaPrincipal||'¡Diseña tu propio Universo!'}}</p>
-    </div>
-</div>
-<!------------MENSAJE INTRODUCCION----------->
-<!----------CATEGORIAS----------->
-<div class="categorias">
-    <div class="contenedor-tabla">
-        <table class="tabla-categorias table">
-            <tr>
-                <td><fa-icon class="icon" [icon]="faTools"></fa-icon></td>
-                <td> HERRAMIENTAS</td>
-                <td>Faciles de utilizar.</td>
-            </tr>
-            <tr>
-                <td><fa-icon class="icon" [icon]="faBusinessTime"></fa-icon></td>
-                <td>NEGOCIOS</td>
-                <td>Emprendimiento a tu modo.</td>
-            </tr>
-            <tr>
-                <td><fa-icon class="icon" [icon]="faUserSecret"></fa-icon></td>
-                <td>SEGURIDAD</td>
-                <td>La máxima seguridad es tu comprensión de la realidad.</td>
-            </tr>
-            <tr>
-                <td><fa-icon class="icon" [icon]="faScroll"></fa-icon></td>
-                <td>DISEÑO</td>
-                <td>No tengas miedo a ser creativo y experimentar con el marketing.</td>
-            </tr>
-        </table>
-    </div>
-</div>
-<!--------FIN--CATEGORIAS----------->
-<div class="container-fluid contenedor-testimonial">
-    <div class="row">
-        <div *ngIf="(fondoTestimonial == undefined)" class="col-xl-6 foto-testimonial">
-            <p>TESTIMONIALES</p>
+
+    <div *ngIf="(fondoPrincipal == undefined)" class="fondo">
+        <div class="mensaje">
+            <p class="frase"> {{descripcionPaginaPrincipal||'¡Diseña tu propio Universo!'}}</p>
         </div>
-        <div *ngIf="(fondoTestimonial != undefined)" [style.background-image]="sanitizeImage(fondoTestimonial)" class="col-xl-6 foto-testimonial">
-            <p>TESTIMONIALES</p>
+    </div>
+    <div *ngIf="(fondoPrincipal != undefined) " class="fondo" [style.background-image]="sanitizeImage(fondoPrincipal)">
+        <div class="mensaje">
+            <p class="frase"> {{descripcionPaginaPrincipal||'¡Diseña tu propio Universo!'}}</p>
         </div>
-        <div class="col-xl-6 testimonial">
-            <div class="tarjeta-testimoniales">
-                <div class="card mb-3" >
-                    <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="../../../assets/img/test2.jpg" class="card-img" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                        <h5 class="card-title">Emili Rose</h5>
-                        <p class="card-text">Desde que cree mi pagina web en este sitio, mi negocio ha ido mejorando.</p>
-                        <p class="card-text"><small class="text-muted">Hace 3 semanas</small></p>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="card mb-3">
-                    <div class="row no-gutters">
+    </div>
+    <!------------MENSAJE INTRODUCCION----------->
+    <!----------CATEGORIAS----------->
+    <div class="categorias">
+        <div class="contenedor-tabla">
+            <table class="tabla-categorias table">
+                <tr>
+                    <td><fa-icon class="icon" [icon]="faTools"></fa-icon></td>
+                    <td> HERRAMIENTAS</td>
+                    <td>Faciles de utilizar.</td>
+                </tr>
+                <tr>
+                    <td><fa-icon class="icon" [icon]="faBusinessTime"></fa-icon></td>
+                    <td>NEGOCIOS</td>
+                    <td>Emprendimiento a tu modo.</td>
+                </tr>
+                <tr>
+                    <td><fa-icon class="icon" [icon]="faUserSecret"></fa-icon></td>
+                    <td>SEGURIDAD</td>
+                    <td>La máxima seguridad es tu comprensión de la realidad.</td>
+                </tr>
+                <tr>
+                    <td><fa-icon class="icon" [icon]="faScroll"></fa-icon></td>
+                    <td>DISEÑO</td>
+                    <td>No tengas miedo a ser creativo y experimentar con el marketing.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!--------FIN--CATEGORIAS----------->
+    <div class="container-fluid contenedor-testimonial">
+        <div class="row">
+            <div *ngIf="(fondoTestimonial == undefined)" class="col-xl-6 foto-testimonial">
+                <p>TESTIMONIALES</p>
+            </div>
+            <div *ngIf="(fondoTestimonial != undefined)" [style.background-image]="sanitizeImage(fondoTestimonial)" class="col-xl-6 foto-testimonial">
+                <p>TESTIMONIALES</p>
+            </div>
+            <div class="col-xl-6 testimonial">
+                <div class="tarjeta-testimoniales">
+                    <div class="card mb-3" >
+                        <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src="../../../assets/img/test1.jpg" class="card-img" alt="...">
+                            <img src="../../../assets/img/test2.jpg" class="card-img" alt="...">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                            <h5 class="card-title">Sara Pineda</h5>
-                            <p class="card-text">La moda me inspiro a crear un sitio y la mejor opcion fue este lugar.</p>
+                            <h5 class="card-title">Emili Rose</h5>
+                            <p class="card-text">Desde que cree mi pagina web en este sitio, mi negocio ha ido mejorando.</p>
                             <p class="card-text"><small class="text-muted">Hace 3 semanas</small></p>
                             </div>
                         </div>
+                        </div>
                     </div>
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="../../../assets/img/test1.jpg" class="card-img" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                <h5 class="card-title">Sara Pineda</h5>
+                                <p class="card-text">La moda me inspiro a crear un sitio y la mejor opcion fue este lugar.</p>
+                                <p class="card-text"><small class="text-muted">Hace 3 semanas</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
-                
+                <!--tarjeta testimonial-->
             </div>
-              <!--tarjeta testimonial-->
+        </div>
+    </div>
+    <div *ngIf="imagenesSecundarias.length != 0" class="contenedor-galeria">
+        <h3 class="pt-4">¡Lo mas visto en este sitio!</h3>
+        <div class="container-fluid contenedor-imagenes-secundarias">
+            <div class="row">
+                <div *ngFor="let imagenSecundaria of imagenesSecundarias" class="col-xl-4 col-lg-6 galeria mb-5">
+                    <img [src]="imagenSecundaria.url" alt="">
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<div class="overlay" style="height: 100vh;display: flex;justify-content: center;align-items: center;background-color: #f7eab7;" *ngIf="!load">
+    <div class="spinner-border text-warning" role="status" style="width: 80px; height: 80px;font-size: 80px;">
+        <span  class="sr-only">Loading...</span>
+    </div>   
+</div>
+     
