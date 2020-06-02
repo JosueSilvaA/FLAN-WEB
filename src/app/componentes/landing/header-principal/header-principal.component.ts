@@ -41,7 +41,10 @@ export class HeaderPrincipalComponent implements OnInit {
   tituloPaginaPrincipal:any;
   logoPaginaPrincipal:any;
   ////////////////////////////////
-  constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService,private firestorage:AngularFireStorage,private paginaPrincipalService:PaginaPrincipalService) { }
+  public load: boolean;
+  constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService,private firestorage:AngularFireStorage,private paginaPrincipalService:PaginaPrincipalService) {
+    this.load = false;
+   }
   uploadPorcent: Observable<number>;
   urlImage: Observable<string>;
 
@@ -49,6 +52,9 @@ export class HeaderPrincipalComponent implements OnInit {
     this.paginaPrincipalService.obtenerPaginaPrincipal().subscribe(res=>{
       this.tituloPaginaPrincipal = res.titulo;
       this.logoPaginaPrincipal = res.logo;
+      setTimeout(() => {
+        this.load = true;
+      }, 2000);
     });
       this.token = sessionStorage.getItem("ACCESS_TOKEN")
       console.log('El token ',this.token)

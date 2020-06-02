@@ -63,7 +63,7 @@ export class AdminPaginaPrincipalComponent implements OnInit {
 
   Toast:any = Swal.mixin({
     toast: true,
-    position: 'top-end',
+    position: 'bottom-end',
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
@@ -181,6 +181,10 @@ export class AdminPaginaPrincipalComponent implements OnInit {
             icon: 'success',
             title: `Se agrego con exito`
           })
+          this.Toast.fire({
+            icon: 'success',
+            title: `Puede visualizar los cambios al ir a la pagina principal`
+          })
           this.NuevaImagen.reset();
         });    
       });
@@ -233,7 +237,7 @@ export class AdminPaginaPrincipalComponent implements OnInit {
           this.fotoSelect= '';
           this.Toast.fire({
             icon: 'success',
-            title: `Se edito con exito`
+            title: `Puede visualizar los cambios al ir a la pagina principal`
           })
         });    
       });

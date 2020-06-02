@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <h3 class="titulos-categoria-admin mt-3">USUARIOS DEL SISTEMA</h3>
-    <div *ngIf="alerta==1" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <div *ngIf="alerta==1" class="alert alert-success alert-dismissible fade show" role="alert">
       <strong>Seleccione una opcion</strong> para que aparezca la informacion.
       <button (click)="alerta=0" type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -233,7 +233,7 @@
             <span *ngIf ="telefonoP.errors.minlength">El minimo permitido son 8 digitos</span>
           </div>
         </div>
-        <button [disabled]="!EditarInfoUsuario.valid" data-dismiss="modal" type="submit" class="btn btn-success"  (click)="editarInfoUsuario()">Editar Informacion</button>
+        <button [disabled]="!EditarInfoUsuario.valid" data-dismiss="modal" type="submit" class="btn btn-success" style="width: 100%;" (click)="editarInfoUsuario()">Editar Informacion</button>
       </form>
     </div>
   </div>

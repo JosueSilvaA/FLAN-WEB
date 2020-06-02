@@ -164,10 +164,14 @@
     }
     
     .tabla-categorias tr td{
-        font-size: 15px;
+        font-size: 12px;
     }
 
     .frase{
         font-size: 26px;
+    }
+
+    .tabla-categorias{
+        font-size: 10px;
     }
 }

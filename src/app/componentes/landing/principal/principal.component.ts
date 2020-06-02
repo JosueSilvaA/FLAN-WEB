@@ -25,10 +25,13 @@ export class PrincipalComponent implements OnInit {
   imagenesSecundarias:any = [];
   fondoPrincipal:any;
   fondoTestimonial:any;
+  favicon:any;
   ngOnInit(): void {
     this.paginaPrincipalService.obtenerPaginaPrincipal().subscribe(res=>{
       this.descripcionPaginaPrincipal = res.descripcion;
       this.imagenesPrincipales = res.imagenes;
+      this.favicon = res.favicon;
+      console.log('EL FAVICON ',this.favicon);
       console.log(this.imagenesPrincipales)
       this.experimento();
       console.log(this.fondoPrincipal);
@@ -36,7 +39,7 @@ export class PrincipalComponent implements OnInit {
       console.log("SECUNDARIAS ",this.imagenesSecundarias);
       setTimeout(() => {
         this.load = true;
-      }, 3000);
+      }, 2000);
     });
   }
 

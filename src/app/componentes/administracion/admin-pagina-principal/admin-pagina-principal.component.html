@@ -1,6 +1,6 @@
 <div class="container-fluid">
-    <h3 class="titulos-categoria-admin mt-3">Gestion de la Pagina Principal</h3>
-    <div *ngIf="alerta==1" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <h3 class="titulos-categoria-admin mt-3">Gestion de la Página Principal</h3>
+    <div *ngIf="alerta==1" class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Seleccione una opcion</strong> para que aparezca la informacion.
         <button (click)="alerta=0" type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -12,7 +12,7 @@
             <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
                 <ngb-panel >
                     <ng-template ngbPanelTitle >
-                    <b>Pagina Principal</b>
+                    <b>Página Principal</b>
                     </ng-template>
                     <ng-template ngbPanelContent >
                         <div class="container-fluid" *ngIf="paginaPrincipal != undefined">
@@ -75,8 +75,14 @@
         </div>
        
         <div class="col-xl-12 col-lg-12 mb-5">
-          <div *ngIf="alerta==1" class="alert alert-warning alert-dismissible fade show " role="alert">
-            <strong>¡IMPORTANTE!</strong> Para que pueda editar imagenes en la pagina principal debe existir la imagen con nombre Principal y Testimonial sino habra imagenes por defecto en la pagina principal.
+          <div *ngIf="alerta==1" class="alert alert-danger alert-dismissible fade show " role="alert">
+            <strong>¡IMPORTANTE!</strong> Para que pueda editar imagenes en la página principal debe existir la imagen con nombre Principal y Testimonial, sino habrá imagenes por defecto en la página principal.
+            <button (click)="alerta=0" type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div *ngIf="alerta==1" class="alert alert-success alert-dismissible fade show " role="alert">
+            <strong>¡IMPORTANTE!</strong> Al realizar una accion de eliminar o agregar,puede dirigirse a la pagina principal del sitio a visualizar los cambios efectuados.
             <button (click)="alerta=0" type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -168,7 +174,7 @@
           </form>
     </div>
     <div class="modal-footer dark">
-      <button type="button" class="btn btn-light" (click)="cerrarModal()">Cancelar</button>
+      <button type="button" class="btn btn-danger" (click)="cerrarModal()">Cancelar</button>
     </div>
   </ng-template>
 

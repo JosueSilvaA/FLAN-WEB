@@ -14,7 +14,7 @@
     <!------------MENSAJE INTRODUCCION----------->
     <!----------CATEGORIAS----------->
     <div class="categorias">
-        <div class="contenedor-tabla">
+        <div class="contenedor-tabla pl-2">
             <table class="tabla-categorias table">
                 <tr>
                     <td><fa-icon class="icon" [icon]="faTools"></fa-icon></td>
@@ -96,9 +96,11 @@
     </div>
 </div>
 
-<div class="overlay" style="height: 100vh;display: flex;justify-content: center;align-items: center;background-color: #f7eab7;" *ngIf="!load">
+<div class="overlay" style="height: 100vh;display: flex;justify-content: center;align-items: center;background-color: #eee6c5;" *ngIf="!load">
     <div class="spinner-border text-warning" role="status" style="width: 80px; height: 80px;font-size: 80px;">
         <span  class="sr-only">Loading...</span>
     </div>   
 </div>
+
+<link rel="icon" type="image/x-icon" href="sanitizeImage(favicon)">
      

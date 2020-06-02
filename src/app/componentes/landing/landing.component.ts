@@ -9,7 +9,6 @@ import { PaginaPrincipalService } from './../../services/pagina-principal.servic
 })
 export class LandingComponent implements OnInit {
   @ViewChild('footer') footerComponent:FooterPrincipalComponent;
-  
   constructor(private paginaPrincipalService:PaginaPrincipalService) { 
     
   }
