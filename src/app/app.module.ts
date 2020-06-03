@@ -26,6 +26,8 @@ import { AdminUsuariosComponent } from './componentes/administracion/admin-usuar
 import { AdminMediosComponent } from './componentes/administracion/admin-medios/admin-medios.component';
 import { AdminTemasComponent } from './componentes/administracion/admin-temas/admin-temas.component';
 import { AdminPaginaPrincipalComponent } from './componentes/administracion/admin-pagina-principal/admin-pagina-principal.component';
+import { AdminInformativasComponent } from './componentes/administracion/admin-informativas/admin-informativas.component';
+import { PostsComponent } from './componentes/administracion/posts/posts.component';
 
 
 
@@ -46,7 +48,9 @@ import { AdminPaginaPrincipalComponent } from './componentes/administracion/admi
     AdminUsuariosComponent,
     AdminMediosComponent,
     AdminTemasComponent,
-    AdminPaginaPrincipalComponent
+    AdminPaginaPrincipalComponent,
+    AdminInformativasComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,

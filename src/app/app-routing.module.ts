@@ -10,9 +10,9 @@ import { PanelPrincipalComponent } from './componentes/administracion/panel-prin
 import { AdminUsuariosComponent } from './componentes/administracion/admin-usuarios/admin-usuarios.component';
 import { AdminMediosComponent } from './componentes/administracion/admin-medios/admin-medios.component';
 import { AdminPaginaPrincipalComponent } from './componentes/administracion/admin-pagina-principal/admin-pagina-principal.component';
-import { AdminPaginasInformativasComponent } from './componentes/administracion/admin-paginas-informativas/admin-paginas-informativas.component';
-import { AdminPostsComponent } from './componentes/administracion/admin-posts/admin-posts.component';
 import { AdminTemasComponent } from './componentes/administracion/admin-temas/admin-temas.component';
+import { AdminInformativasComponent } from './componentes/administracion/admin-informativas/admin-informativas.component';
+import { PostsComponent } from './componentes/administracion/posts/posts.component';
 
 
 const routes: Routes = [
@@ -30,9 +30,9 @@ const routes: Routes = [
       {path:'',component:PanelPrincipalComponent},
       {path:'usuarios',component:AdminUsuariosComponent},
       {path:'medios',component:AdminMediosComponent},
+      {path:'paginas-informativas',component:AdminInformativasComponent},
+      {path:'posts',component:PostsComponent},
       {path:'pagina-principal',component:AdminPaginaPrincipalComponent},
-      {path:'paginas-informativas',component:AdminPaginasInformativasComponent},
-      {path:'posts',component:AdminPostsComponent},
       {path:'temas',component:AdminTemasComponent}
     ]
   }

@@ -1,0 +1,624 @@
+<div class="container-fluid">
+    <h3 class="titulos-categoria-admin mt-3">Paginas Informativas del Sistema</h3>
+    <div *ngIf="alerta==1" class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Seleccione una opcion</strong> para que aparezca la informacion.
+      <button (click)="alerta=0" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <hr class="bg-dark" style="color: #444444;">
+    <div class="row">
+        <div class="col-xl-12 mb-4">
+          <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
+            <ngb-panel >
+              <ng-template ngbPanelTitle >
+                <b>Paginas Informativas</b>
+              </ng-template>
+              <ng-template ngbPanelContent >
+                <div class="tablas" *ngIf="paginas.length != 0">
+                  <table class="table table-hover table-dark">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Encabezado</th>
+                        <th scope="col">Pie Pagina</th>
+                        <th scope="col">Contenidos</th>
+                        <th scope="col">Imagenes</th>
+                        <th scope="col">Videos</th>
+                        <th scope="col">Documentos</th>
+                        <th scope="col">Visualizacion</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Gestiones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let pagina of paginas;let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{pagina.titulo}}</td>
+                            <td>{{pagina.descripcion}}</td>
+                            <td>{{pagina.encabezado}}</td>
+                            <td>{{pagina.piePagina}}</td>
+                            <td>{{pagina.contenido.length}}</td>
+                            <td>{{pagina.imagenes.length}}</td>
+                            <td>{{pagina.videos.length}}</td>
+                            <td>{{pagina.documentos.length}}</td>
+                            <td>{{pagina.visualizacion}}</td>
+                            <td>{{pagina.estado}}</td>
+                            <td>
+                                <fa-icon class="icon mr-2 iconos" [icon]="faTrashAlt"  (click)="setPaginaSeleccionada(pagina._id)" (click)="abrirModal(eliminarPagina)"></fa-icon>
+                                <fa-icon class="icon mr-2 iconos" [icon]="faPen" (click)="setPaginaSeleccionada(pagina._id)" (click)="abrirModal(editarPagina)"></fa-icon>
+                                <fa-icon class="icon mr-2 iconos" [icon]="faEye" (click)="setPaginaSeleccionada(pagina._id)" (click)="abrirModal(visualizacionPagina)"></fa-icon>
+                                <fa-icon class="icon mr-2 iconos" [icon]="faSync" (click)="setPaginaSeleccionada(pagina._id)" (click)="abrirModal(estadoPagina)"></fa-icon>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                          <td colspan="12"><fa-icon class="icon ml-2" style="font-size: 25px;cursor: pointer;" [icon]="faPlusSquare" (click)="abrirModal(nuevaPagina)"></fa-icon></td>
+                        </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
+        </div>
+        <div class="col-xl-12 mb-5">
+          <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-1" >
+            <ngb-panel title="Agregar contenido a las paginas">
+              <ng-template ngbPanelContent>
+                <div class="container-fluid" *ngIf="paginas.length != 0 && navegacion == 0">
+                    <div class="row">
+                      <ul class="list-group col-xl-12">
+                        <li *ngFor="let pagina of paginas" class="list-group-item list-group-item-action listar-paginas"   (click)="setPaginaSeleccionada(pagina._id)">{{pagina.titulo}}</li>
+                      </ul>
+                    </div>
+                </div>
+                <div class="" *ngIf="navegacion == 1 && contenidoPorPagina != 0">
+                    <div class="row">
+                        <div *ngFor="let contenido of contenidoPorPagina" class=" col-xl-12 p-3" style="width: 100%;">
+                            <div class="card"  style="border: 1px solid black;width: 90%;margin: 0 auto;">
+                                <div class="card-body">
+                                  <p>{{contenido.informacion}}</p>
+                                </div>
+                                <table class="table table-hover tablas table-bordered table-dark">
+                                    <tbody>
+                                      <tr>
+                                        <td>
+                                            <fa-icon class="icon mr-3 iconos" style="font-size: 25px;cursor: pointer;" [icon]="faTrashAlt" (click)="setContenidoSeleccionado(contenido._id)" (click)="abrirModal(eliminarContenido)"></fa-icon>
+                                            <fa-icon class="icon ml-2 iconos" style="font-size: 25px;cursor: pointer;" [icon]="faPen" (click)="setContenidoSeleccionado(contenido._id)" (click)="abrirModalContenido(editarContenido)"></fa-icon>
+                                          </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="" *ngIf=" navegacion == 1">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <table class="table table-hover tablas table-bordered table-dark">
+                              <tbody>
+                                <tr>
+                                  <td>
+                                      <fa-icon class="icon mr-3 iconos" style="font-size: 25px;cursor: pointer;" [icon]="faArrowLeft" (click)="navegacion=0"></fa-icon>
+                                      <fa-icon class="icon ml-2 iconos" style="font-size: 25px;cursor: pointer;" [icon]="faPlusSquare" (click)="abrirModalContenido(agregarContenido)"></fa-icon>
+                                    </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
+        </div>
+        <div class="col-xl-12 col-lg-12 mb-5">
+            <div *ngIf="alerta==1" class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>¡IMPORTANTE!</strong> Para que pueda editar imagenes en la página principal debe existir la imagen con nombre Principal y Testimonial, sino habrá imagenes por defecto en la página principal.
+              <button (click)="alerta=0" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div *ngIf="alerta==1" class="alert alert-success alert-dismissible fade show " role="alert">
+              <strong>¡IMPORTANTE!</strong> Al realizar una accion de eliminar o agregar,puede dirigirse a la pagina principal del sitio a visualizar los cambios efectuados.
+              <button (click)="alerta=0" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+              <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
+                  <ngb-panel >
+                      <ng-template ngbPanelTitle >
+                      <b>Imagenes Pagina Principal</b>
+                      </ng-template>
+                        <ng-template ngbPanelContent >
+                            <div class="container-fluid" *ngIf="paginas.length != 0 && navegacionImagen == 0">
+                                <div class="row">
+                                  <ul class="list-group col-xl-12">
+                                    <li *ngFor="let pagina of paginas" class="list-group-item list-group-item-action listar-paginas"   (click)="setPaginaSeleccionada(pagina._id)">{{pagina.titulo}}</li>
+                                  </ul>
+                                </div>
+                            </div>
+                            <div class="container-fluid p-0" *ngIf="navegacionImagen == 2">
+                                <div class="row contenedor-imagenes">
+                                  <div *ngFor="let imagen of imagenes" class=" col-xl-3 col-lg-4 col-md-6 col-sm-12 p-3">
+                                    <div class="card"  style="width: 100%;">
+                                      <img [src]="imagen.url" class="card-img-top" style="height: 30vh;cursor: pointer" alt="..." (click)="setIdImagen(imagen._id)" (click)="abrirModal(editarImagen)">
+                                      <div class="card-body mt-3 p-2">
+                                        <h5 class="card-title">{{imagen.nombreImagen}}</h5>
+                                        <p class="card-text">{{imagen.descripcion}}</p>
+                                        <hr>
+                                        <div class="gestion-imagen">
+                                          <fa-icon class="icon mr-5 iconos-gestion" [icon]="faTrashAlt" (click)="setIdImagen(imagen._id)" (click)="abrirModal(eliminarImg)"></fa-icon>
+                                          <fa-icon class="icon iconos-gestion" [icon]="faPenAlt" (click)="setIdImagen(imagen._id)" (click)="abrirModal(editarInfoImagen)"></fa-icon>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div> 
+                            </div>
+                            <div class="" *ngIf=" navegacionImagen == 2">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <table class="table table-hover tablas table-bordered table-dark">
+                                          <tbody>
+                                            <tr>
+                                              <td>
+                                                  <fa-icon class="icon mr-3 iconos" style="font-size: 25px;cursor: pointer;" [icon]="faArrowLeft" (click)="navegacionImagen=0"></fa-icon>
+                                                  <fa-icon class="icon ml-2 iconos" style="font-size: 25px;cursor: pointer;" [icon]="faPlusSquare" (click)="abrirModal(nuevaImagen)"></fa-icon>
+                                                </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                          <!--<div class="container-fluid p-0" *ngIf="imagenes.length != 0">
+                              <div class="row contenedor-imagenes">
+                                <div *ngFor="let imagen of imagenes" class=" col-xl-3 col-lg-4 col-md-6 col-sm-12 p-3">
+                                  <div class="card"  style="width: 100%;">
+                                    <img [src]="imagen.url" class="card-img-top" style="height: 30vh;cursor: pointer" alt="..." (click)="setIdImagen(imagen._id)" (click)="abrirModal(editarImagen)">
+                                    <div class="card-body mt-3 p-2">
+                                      <h5 class="card-title">{{imagen.nombreImagen}}</h5>
+                                      <p class="card-text">{{imagen.descripcion}}</p>
+                                      <hr>
+                                      <div class="gestion-imagen">
+                                        <fa-icon class="icon mr-5 iconos-gestion" [icon]="faTrashAlt" (click)="setIdImagen(imagen._id)" (click)="abrirModal(eliminarImg)"></fa-icon>
+                                        <fa-icon class="icon iconos-gestion" [icon]="faPenAlt" (click)="setIdImagen(imagen._id)" (click)="abrirModal(editarInfoImagen)"></fa-icon>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div> 
+                          </div>
+                          <div class=" p-0" *ngIf="paginaPrincipal != undefined">
+                              <div class="row">
+                                <div class="col-xl-12">
+                                  <table class="table table-hover tablas table-bordered table-dark">
+                                    <tbody>
+                                      <tr>
+                                        <td><fa-icon class="icon ml-2 iconos" [icon]="faPlusSquare"  (click)="abrirModal(nuevaImagen)"></fa-icon></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                          </div>-->
+                      </ng-template> 
+                  </ngb-panel>
+              </ngb-accordion>
+          </div>
+      </div>
+</div>
+
+<!-------------------------------------------------------------------------------------------------------------->
+
+<ng-template #nuevaPagina let-modal>
+    <div class="modal-header dark">
+      <h4 class="modal-title">Nueva Pagina</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup] ="NuevaPagina">
+            <div class="form-group">
+              <label for="inputAddress">Titulo</label>
+              <input type="text" class="form-control" id="inputAddress" [ngClass]="{'input-error':titulo.invalid && (titulo.dirty || titulo.touched)}"  formControlName="titulo" required>
+              <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)" class="error">
+                <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                <span *ngIf ="titulo.errors.minlength">Se requieren mas caracteres</span>
+                <span *ngIf ="titulo.errors.maxlength">Exceso de caracteres</span>
+                <span *ngIf ="titulo.errors.required">El campo es obligatorio</span>
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Descripcion</label>
+                <textarea class="form-control"  [ngClass]="{'input-error':descripcion.invalid && (descripcion.dirty || descripcion.touched)}"  formControlName="descripcion" required></textarea>
+                <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="error">
+                  <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                  <span *ngIf ="descripcion.errors.minlength">Se requieren mas caracteres</span>
+                  <span *ngIf ="descripcion.errors.required">El campo es obligatorio</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Encabezado</label>
+                <textarea class="form-control"  [ngClass]="{'input-error':encabezado.invalid && (encabezado.dirty || encabezado.touched)}"  formControlName="encabezado" required></textarea>
+                <div *ngIf="encabezado.invalid && (encabezado.dirty || encabezado.touched)" class="error">
+                  <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                  <span *ngIf ="encabezado.errors.minlength">Se requieren mas caracteres.</span>
+                  <span *ngIf ="encabezado.errors.maxlength">Exceso de caracteres.</span>
+                  <span *ngIf ="encabezado.errors.required">El campo es obligatorio.</span>
+                </div>
+              </div> 
+            <div class="form-group">
+              <label for="inputAddress">Pie de Pagina</label>
+              <textarea class="form-control"  [ngClass]="{'input-error':piePagina.invalid && (piePagina.dirty || piePagina.touched)}"  formControlName="piePagina" required></textarea>
+              <div *ngIf="piePagina.invalid && (piePagina.dirty || piePagina.touched)" class="error">
+                <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                <span *ngIf ="piePagina.errors.minlength">Se requieren mas caracteres.</span>
+                <span *ngIf ="piePagina.errors.maxlength">Exceso de caracteres.</span>
+                <span *ngIf ="piePagina.errors.required">El campo es obligatorio.</span>
+              </div>
+            </div> 
+            <div class="form-group">
+                <select class="form-control" [ngClass]="{'input-error':visualizacion.invalid && (visualizacion.dirty || visualizacion.touched)}" formControlName="visualizacion">
+                    <option class="form-control" value="" selected>Seleccione la visualizacion</option>
+                    <option class="form-control" value="publica">Publica</option>
+                    <option class="form-control" value="privada">Privada</option>
+                </select>
+                <div *ngIf="visualizacion.invalid && (visualizacion.dirty || visualizacion.touched)" class="error">
+                    <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                    <span *ngIf ="visualizacion.errors.required">El campo es obligatorio.</span>
+                </div>
+            </div> 
+            <button [disabled]="!NuevaPagina.valid" type="submit" class="btn btn-outline-success" style="width: 100%;" (click)="agregarPagina()">Página Nueva</button>
+          </form>
+    </div>
+    <div class="modal-footer dark">
+      <button type="button" class="btn btn-danger" (click)="cerrarModal()">Cancelar</button>
+    </div>
+</ng-template>
+
+  <!-------------------------------------------------------------------------------------------------------------->
+
+<ng-template #eliminarPagina let-modal>
+    <div class="modal-header dark">
+      <h4 class="modal-title">Eliminar Pagina</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        ¿Desea eliminar permanente esta página?
+    </div>
+    <div class="modal-footer dark">
+        <button type="button" class="btn btn-outline-success" (click)="borrarPagina()">Eliminar Página</button>
+        <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()">Cancelar</button>
+    </div>
+</ng-template>
+
+  <!-------------------------------------------------------------------------------------------------------------->
+
+<ng-template #editarPagina let-modal>
+    <div class="modal-header dark">
+      <h4 class="modal-title">Nueva Pagina</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup] ="EditarPagina">
+            <div class="form-group">
+              <label for="inputAddress">Titulo</label>
+              <input type="text" class="form-control" id="inputAddress" [ngClass]="{'input-error':tituloN.invalid && (tituloN.dirty || tituloN.touched)}"  formControlName="titulo" required>
+              <div *ngIf="tituloN.invalid && (tituloN.dirty || tituloN.touched)" class="error">
+                <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                <span *ngIf ="tituloN.errors.minlength">Se requieren mas caracteres</span>
+                <span *ngIf ="tituloN.errors.maxlength">Exceso de caracteres</span>
+                <span *ngIf ="tituloN.errors.required">El campo es obligatorio</span>
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Descripcion</label>
+                <textarea class="form-control"  [ngClass]="{'input-error':descripcionN.invalid && (descripcionN.dirty || descripcionN.touched)}"  formControlName="descripcion" required></textarea>
+                <div *ngIf="descripcionN.invalid && (descripcionN.dirty || descripcionN.touched)" class="error">
+                  <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                  <span *ngIf ="descripcionN.errors.minlength">Se requieren mas caracteres</span>
+                  <span *ngIf ="descripcionN.errors.required">El campo es obligatorio</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Encabezado</label>
+                <textarea class="form-control"  [ngClass]="{'input-error':encabezadoN.invalid && (encabezadoN.dirty || encabezadoN.touched)}"  formControlName="encabezado" required></textarea>
+                <div *ngIf="encabezadoN.invalid && (encabezadoN.dirty || encabezadoN.touched)" class="error">
+                  <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                  <span *ngIf ="encabezadoN.errors.minlength">Se requieren mas caracteres.</span>
+                  <span *ngIf ="encabezadoN.errors.maxlength">Exceso de caracteres.</span>
+                  <span *ngIf ="encabezadoN.errors.required">El campo es obligatorio.</span>
+                </div>
+              </div> 
+            <div class="form-group">
+              <label for="inputAddress">Pie de Pagina</label>
+              <textarea class="form-control"  [ngClass]="{'input-error':piePaginaN.invalid && (piePaginaN.dirty || piePaginaN.touched)}"  formControlName="piePagina" required></textarea>
+              <div *ngIf="piePaginaN.invalid && (piePaginaN.dirty || piePaginaN.touched)" class="error">
+                <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                <span *ngIf ="piePaginaN.errors.minlength">Se requieren mas caracteres.</span>
+                <span *ngIf ="piePaginaN.errors.maxlength">Exceso de caracteres.</span>
+                <span *ngIf ="piePaginaN.errors.required">El campo es obligatorio.</span>
+              </div>
+            </div> 
+            <button [disabled]="!EditarPagina.valid" type="submit" class="btn btn-outline-success" style="width: 100%;" (click)="modificarPagina()">Editar Informacion</button>
+          </form>
+    </div>
+    <div class="modal-footer dark">
+      <button type="button" class="btn btn-danger" (click)="cerrarModal()">Cancelar</button>
+    </div>
+</ng-template>
+  <!-------------------------------------------------------------------------------------------------------------->
+<ng-template #visualizacionPagina let-modal>
+    <div class="modal-header dark">
+      <h4 class="modal-title">Cambiar la visualizacion a la Pagina</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup] ="EditarVisualizacion">
+            <div class="form-group">
+                <select class="form-control" [ngClass]="{'input-error':visualizacionC.invalid && (visualizacionC.dirty || visualizacionC.touched)}" formControlName="visualizacion">
+                    <option class="form-control" value="" selected>Seleccione la visualizacion</option>
+                    <option class="form-control" value="publica">Publica</option>
+                    <option class="form-control" value="privada">Privada</option>
+                </select>
+                <div *ngIf="visualizacionC.invalid && (visualizacionC.dirty || visualizacionC.touched)" class="error">
+                    <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                    <span *ngIf ="visualizacionC.errors.required">El campo es obligatorio.</span>
+                </div>
+            </div> 
+            <button [disabled]="!EditarVisualizacion.valid" type="submit" class="btn btn-outline-success" style="width: 100%;" (click)="cambiarVisualizacion()">Cambiar Visualizacion</button>
+        </form>
+    </div>
+</ng-template>
+
+  <!-------------------------------------------------------------------------------------------------------------->
+<ng-template #estadoPagina let-modal>
+    <div class="modal-header dark">
+      <h4 class="modal-title">Cambiar el estado de la Página</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup] ="EditarEstado">
+            <div class="form-group">
+                <select class="form-control" [ngClass]="{'input-error':estado.invalid && (estado.dirty || estado.touched)}" formControlName="estado">
+                    <option class="form-control" value="" selected>Seleccione el estado</option>
+                    <option class="form-control" value="activa">Activa</option>
+                    <option class="form-control" value="inactiva">Inactiva</option>
+                </select>
+                <div *ngIf="estado.invalid && (estado.dirty || estado.touched)" class="error">
+                    <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                    <span *ngIf ="estado.errors.required">El campo es obligatorio.</span>
+                </div>
+            </div> 
+            <button [disabled]="!EditarEstado.valid" type="submit" class="btn btn-outline-success" style="width: 100%;" (click)="cambiarEstado()">Cambiar Visualizacion</button>
+        </form>
+    </div>
+</ng-template>
+  <!-------------------------------------------------------------------------------------------------------------->
+  <ng-template #agregarContenido let-modal>
+    <div class="modal-header dark">
+      <h4 class="modal-title">Agregar Contenido</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup] ="Contenido">
+            <div class="form-group">
+                <textarea class="form-control" rows="15"  [ngClass]="{'input-error':informacion.invalid && (informacion.dirty || informacion.touched)}"  formControlName="informacion" required></textarea>
+                <div *ngIf="informacion.invalid && (informacion.dirty || informacion.touched)" class="error">
+                <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                <span *ngIf ="informacion.errors.minlength">Se requieren mas caracteres.</span>
+                <span *ngIf ="informacion.errors.maxlength">Exceso de caracteres.</span>
+                <span *ngIf ="informacion.errors.required">El campo es obligatorio.</span>
+              </div>
+            </div> 
+            <button [disabled]="!Contenido.valid" type="submit" class="btn btn-outline-success" style="width: 100%;" (click)="nuevoContenido()">Agregar Contenido</button>
+        </form>
+    </div>
+</ng-template>
+
+<!-------------------------------------------------------------------------->
+
+<ng-template #eliminarContenido let-modal>
+    <div class="modal-header dark">
+      <h4 class="modal-title">Eliminar Contenido</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        ¿Desea eliminar permanente esta contenido?
+    </div>
+    <div class="modal-footer dark">
+        <button type="button" class="btn btn-outline-success" (click)="borrarContenido()">Eliminar Contenido</button>
+        <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()">Cancelar</button>
+    </div>
+</ng-template>
+
+<!-------------------------------------------------------------------------->
+<ng-template #editarContenido let-modal>
+    <div class="modal-header dark">
+      <h4 class="modal-title">Editar Contenido</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup] ="Contenido">
+            <div class="form-group">
+                <textarea class="form-control" rows="15"  [ngClass]="{'input-error':informacion.invalid && (informacion.dirty || informacion.touched)}"  formControlName="informacion" required></textarea>
+                <div *ngIf="informacion.invalid && (informacion.dirty || informacion.touched)" class="error">
+                <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                <span *ngIf ="informacion.errors.minlength">Se requieren mas caracteres.</span>
+                <span *ngIf ="informacion.errors.maxlength">Exceso de caracteres.</span>
+                <span *ngIf ="informacion.errors.required">El campo es obligatorio.</span>
+              </div>
+            </div> 
+            <button [disabled]="!Contenido.valid" type="submit" class="btn btn-outline-success" style="width: 100%;" (click)="modificarContenido()">Editar Contenido</button>
+        </form>
+    </div>
+</ng-template>
+
+<!----------------------------------------------------------------------------------->
+
+<ng-template #nuevaImagen let-modal>
+    <div class="modal-header dark">
+      <h4 class="modal-title">Agregar  Imagen</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup] ="NuevaImagen">
+            <div class="form-group">
+              <label for="inputAddress">Nombre Imagen</label>
+              <input type="text" class="form-control" id="inputAddress" [ngClass]="{'input-error':nombreI.invalid && (nombreI.dirty || nombreI.touched)}"  formControlName="nombreImagen" required>
+              <div *ngIf="nombreI.invalid && (nombreI.dirty || nombreI.touched)" class="error">
+                <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                <span *ngIf ="nombreI.errors.minlength">Se requieren mas caracteres.</span>
+                <span *ngIf ="nombreI.errors.maxlength">Exceso de caracteres.</span>
+                <span *ngIf ="nombreI.errors.required">El campo es obligatorio.</span>
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Descripcion</label>
+                <textarea class="form-control"  [ngClass]="{'input-error':descripcionI.invalid && (descripcionI.dirty || descripcionI.touched)}"  formControlName="descripcion" required></textarea>
+                <div *ngIf="descripcionI.invalid && (descripcionI.dirty || descripcionI.touched)" class="error">
+                  <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                  <span *ngIf ="descripcionI.errors.minlength">Se requieren mas caracteres.</span>
+                  <span *ngIf ="descripcionI.errors.maxlength">Exceso de caracteres.</span>
+                  <span *ngIf ="descripcionI.errors.required">El campo es obligatorio.</span>
+                </div>
+            </div>
+            <div class="form-group contenedor-fotos">
+                <div class="contenedor-foto">
+                    <input type="file" accept=".png, .jpg" class="d-none" (change)="fotoNuevaSeleccionada($event)" #fotoInput>
+                    <div class="contenedor-nueva-foto">
+                        <p>Seleccione una Imagen</p>
+                        <img  [src]="fotoSelect || '../../../../assets/img/no-image.png'" class="img-fluid" alt="foto perfil" (click)="fotoInput.click()">
+                        <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"  [style.width]="(uploadPorcent | async) + '%'">
+                        </div>
+                        </div>
+                        <input #imagen type="hidden" [value]="urlImage | async">
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <button *ngIf="(urlImage | async) && NuevaImagen.valid ;else btnDisable" type="button" class="btn btn-outline-success" (click)="agregarImagen()" style="width: 100%;">Nueva Foto</button>
+            <ng-template #btnDisable>
+                <button  type="button" class="btn btn-secondary" disabled=true (click)="agregarImagen()" style="width: 100%;">Nueva Foto</button>
+             </ng-template>
+          </form>
+    </div>
+    <div class="modal-footer dark">
+      <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()">Cancelar</button>
+    </div>
+  </ng-template>
+
+  <ng-template #eliminarImg let-modal>
+    <div class="modal-header dark">
+      <h4 class="modal-title">Eliminar Imagen</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+       <p>¿Desea eliminar esta imagen?</p>
+    </div>
+    <div class="modal-footer dark">
+      <button type="button" class="btn btn-outline-success" (click)="borrarImagen()">Aceptar</button>
+      <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()">Cancelar</button>
+    </div>
+  </ng-template>
+
+  <ng-template #editarInfoImagen let-modal>
+    <div class="modal-header dark">
+      <h4 class="modal-title">Editar  Imagen</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup] ="NuevaImagen">
+            <div class="form-group">
+              <label for="inputAddress">Nombre Imagen</label>
+              <input type="text" class="form-control" id="inputAddress" [ngClass]="{'input-error':nombreI.invalid && (nombreI.dirty || nombreI.touched)}"  formControlName="nombreImagen" required>
+              <div *ngIf="nombreI.invalid && (nombreI.dirty || nombreI.touched)" class="error">
+                <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                <span *ngIf ="nombreI.errors.minlength">Se requieren mas caracteres.</span>
+                <span *ngIf ="nombreI.errors.maxlength">Exceso de caracteres.</span>
+                <span *ngIf ="nombreI.errors.required">El campo es obligatorio.</span>
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Descripcion</label>
+                <textarea class="form-control"  [ngClass]="{'input-error':descripcionI.invalid && (descripcionI.dirty || descripcionI.touched)}"  formControlName="descripcion" required></textarea>
+                <div *ngIf="descripcionI.invalid && (descripcionI.dirty || descripcionI.touched)" class="error">
+                  <fa-icon class="icon mr-1" [icon]="faExclamation"></fa-icon>
+                  <span *ngIf ="descripcionI.errors.minlength">Se requieren mas caracteres.</span>
+                  <span *ngIf ="descripcionI.errors.maxlength">Exceso de caracteres.</span>
+                  <span *ngIf ="descripcionI.errors.required">El campo es obligatorio.</span>
+                </div>
+            </div>
+  
+            <button *ngIf="NuevaImagen.valid ;else btnDisable" type="button" class="btn btn-outline-success" (click)="modificarImagen()" style="width: 100%;">Editar Foto</button>
+            <ng-template #btnDisable>
+                <button  type="button" class="btn btn-secondary" disabled=true (click)="modificarImagen()" style="width: 100%;">Editar Foto</button>
+             </ng-template>
+          </form>
+    </div>
+    <div class="modal-footer dark">
+      <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()">Cancelar</button>
+    </div>
+  </ng-template>
+
+  <ng-template #editarImagen let-modal>
+    <div class="modal-header dark">
+      <h4 class="modal-title">Editar URL Imagen</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group contenedor-fotos">
+        <div class="contenedor-foto">
+            <input type="file" accept=".png, .jpg" class="d-none" (change)="fotoNuevaSeleccionada($event)" #fotoInput>
+            <div class="contenedor-nueva-foto">
+                <p>Seleccione una Imagen</p>
+                <img  [src]="fotoSelect || '../../../../assets/img/no-image.png'" class="img-fluid" alt="foto perfil" (click)="fotoInput.click()">
+                <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar"  [style.width]="(uploadPorcent | async) + '%'">
+                </div>
+                </div>
+                <input #imagen type="hidden" [value]="urlImage | async">
+                <br>
+            </div>
+        </div>
+    </div>
+    <button *ngIf="(urlImage | async) && NuevaImagen.valid ;else btnDisable" type="button" class="btn btn-outline-success" (click)="editarURL()" style="width: 100%;">Nueva Foto</button>
+    <ng-template #btnDisable>
+        <button  type="button" class="btn btn-secondary" disabled=true (click)="editarURL()" style="width: 100%;">Nueva Foto</button>
+     </ng-template>
+    </div>
+    <div class="modal-footer dark">
+      <button type="button" class="btn btn-outline-danger" (click)="cerrarModal()">Cancelar</button>
+    </div>
+  </ng-template>

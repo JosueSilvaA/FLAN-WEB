@@ -1,0 +1,96 @@
+table{
+  margin: 0px;
+  cursor: default;
+}
+
+
+.tablas{
+  text-align: center;
+}
+
+.iconos{
+  cursor: pointer;
+}
+
+.listar-paginas{
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.tablas{
+  width: 100%;
+  overflow-x: auto;
+}
+
+.list-group{
+  padding: 0px;
+}
+
+.card-body{
+  width: 95%;
+  height: auto;
+  margin: 0 auto;
+  text-align: justify;
+  
+}
+
+.contenedor-nueva-foto img{
+  cursor: pointer;
+}
+
+.contenedor-imagenes{
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  background-color:  #eaecee ;
+}
+
+hr{
+  margin-bottom: 0px;
+  
+} 
+
+
+.iconos-gestion{
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.card-img-top{
+  background-size: cover;
+  background-position: center center;
+
+}
+
+.gestion-imagen{
+  display: flex;
+  justify-content: center;
+}
+
+.dark{
+  background-color: #eaecee ;
+}
+
+ngb-accordion::ng-deep.card::ng-deep
+  .card-body{
+    color: #666666;
+    padding: 0px;
+  }
+
+ngb-accordion::ng-deep.card::ng-deep
+  .card-header{
+    background-color:    #d5d8dc  ;
+  }
+  
+ngb-accordion::ng-deep.card::ng-deep
+  .btn{
+    color:#444444;
+    text-decoration: none;
+  }
+
+ngb-accordion::ng-deep.card::ng-deep
+  .btn:focus{
+      box-shadow: 0 0 0 .2rem rgba(1, 15, 31, 0.25);
+  }
