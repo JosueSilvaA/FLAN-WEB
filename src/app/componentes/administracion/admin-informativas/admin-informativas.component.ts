@@ -67,17 +67,17 @@ export class AdminInformativasComponent implements OnInit {
 
   NuevaPagina = new FormGroup({
     titulo : new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(10)]),
-    descripcion : new FormControl('',[Validators.required,Validators.minLength(15)]),
-    encabezado: new FormControl('',[Validators.required,Validators.minLength(15),Validators.maxLength(30)]),
-    piePagina: new FormControl('',[Validators.required,Validators.minLength(15),Validators.maxLength(30)]),
+    descripcion : new FormControl('',[Validators.required,Validators.minLength(20)]),
+    encabezado: new FormControl('',[Validators.required,Validators.minLength(15),Validators.maxLength(40)]),
+    piePagina: new FormControl('',[Validators.required,Validators.minLength(15),Validators.maxLength(40)]),
     visualizacion: new FormControl('',[Validators.required])
   });
 
   EditarPagina = new FormGroup({
     titulo : new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(10)]),
-    descripcion : new FormControl('',[Validators.required,Validators.minLength(15)]),
-    encabezado: new FormControl('',[Validators.required,Validators.minLength(15),Validators.maxLength(30)]),
-    piePagina: new FormControl('',[Validators.required,Validators.minLength(15),Validators.maxLength(30)]),
+    descripcion : new FormControl('',[Validators.required,Validators.minLength(20)]),
+    encabezado: new FormControl('',[Validators.required,Validators.minLength(15),Validators.maxLength(40)]),
+    piePagina: new FormControl('',[Validators.required,Validators.minLength(15),Validators.maxLength(40)]),
   });
 
   EditarVisualizacion = new FormGroup({
@@ -166,7 +166,6 @@ export class AdminInformativasComponent implements OnInit {
       for (let i = 0; i < res.length; i++) {
         if (res[i].tipo=='informativa') {
           this.paginas.push(res[i]);
-          console.log(this.paginas)
         }
       }
     });
@@ -177,7 +176,6 @@ export class AdminInformativasComponent implements OnInit {
     this.navegacionImagen = 2;
     this.idPaginaSeleccionada = idPagina;
     this.cargarInformacion(idPagina);
-    console.log(this.idPaginaSeleccionada);
   }
 
   setContenidoSeleccionado(idContenido):void{
@@ -186,7 +184,6 @@ export class AdminInformativasComponent implements OnInit {
   }
 
   setIdImagen(idImagen):void{
-    console.log('id de imagen ',idImagen)
     this.NuevaImagen.reset();
     this.imagenSeleccionada = idImagen;
     this.obtenerInfoImagen(this.imagenSeleccionada);
@@ -215,16 +212,11 @@ export class AdminInformativasComponent implements OnInit {
   obtenerInfoImagen(idImagen):void{
     
     this.paginaService.obtenerImagen(idImagen,this.idPaginaSeleccionada).subscribe(res=>{
-      console.log('imagen seleccionada ',idImagen, 'PAGINA SELECCIONADA ',this.idPaginaSeleccionada);
-      console.log('INFO DE LA IMAGEN',res)
       this.NuevaImagen.controls['nombreImagen'].setValue(res.nombreImagen);
       this.NuevaImagen.controls['descripcion'].setValue(res.descripcion);
     });
   }
   
-  prueba():void{
-    console.log(this.idPaginaSeleccionada)
-  }
 
   agregarPagina():void{
     let nuevaPagina = {
@@ -257,16 +249,24 @@ export class AdminInformativasComponent implements OnInit {
   borrarPagina():void{
     this.paginaService.eliminarPagina(this.idPaginaSeleccionada).subscribe(result=>{
       this.paginaService.obtenerPaginas().subscribe(res=>{
+        this.navegacion = 0;
+        this.navegacionImagen = 0;
         this.paginas = [];
+        this.modalService.dismissAll();
+        this.contenidoPorPagina = [];
+        this.contenidoPorPagina = res.contenido;
+        this.imagenes = [];
+        this.imagenes = res.imagenes;
+        this.Toast.fire({
+          icon: 'success',
+          title: `Eliminada la página con exito`
+        });
         for (let i = 0; i < res.length; i++) {
           
           if (res[i].tipo=='informativa') {
-            this.Toast.fire({
-              icon: 'success',
-              title: `Eliminada la página con exito`
-            });
+            
             this.paginas.push(res[i]);
-            this.modalService.dismissAll();
+            
           }
         }
       });
@@ -459,8 +459,6 @@ export class AdminInformativasComponent implements OnInit {
   }
 
   borrarImagen():void{
-    console.log('Imagen Seleccionada',this.imagenSeleccionada)
-    console.log('Pagina Seleccionada ',this.idPaginaSeleccionada)
     this.paginaService.eliImagen(this.imagenSeleccionada,this.idPaginaSeleccionada).subscribe(resultado=>{
       this.paginaService.obtenerPagina(this.idPaginaSeleccionada).subscribe(respuesta=>{
         this.paginaService.obtenerPaginas().subscribe(res=>{
@@ -514,7 +512,6 @@ export class AdminInformativasComponent implements OnInit {
 
   editarURL():void{
     this.urlImage.subscribe(url=>{
-      console.log(url)
       let u ={
         url:url
       }

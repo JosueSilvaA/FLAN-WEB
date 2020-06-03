@@ -32,6 +32,5 @@ export class FooterPrincipalComponent implements OnInit {
 
   bienvenida(estado){
     this.logueado = estado;
-    console.log('estado en footer de sesion ',this.logueado);
   }
 }

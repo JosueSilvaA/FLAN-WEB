@@ -9,6 +9,7 @@ import { finalize } from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import { faExclamationTriangle,faUnlock } from '@fortawesome/free-solid-svg-icons'
 import { PaginaPrincipalService } from './../../../services/pagina-principal.service';
+import { PaginaService } from '../../../services/pagina.service'
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -41,8 +42,9 @@ export class HeaderPrincipalComponent implements OnInit {
   tituloPaginaPrincipal:any;
   logoPaginaPrincipal:any;
   ////////////////////////////////
+  paginas:any = [];
   public load: boolean;
-  constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService,private firestorage:AngularFireStorage,private paginaPrincipalService:PaginaPrincipalService) {
+  constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService,private firestorage:AngularFireStorage,private paginaPrincipalService:PaginaPrincipalService,private paginaService:PaginaService) {
     this.load = false;
    }
   uploadPorcent: Observable<number>;
@@ -57,7 +59,6 @@ export class HeaderPrincipalComponent implements OnInit {
       }, 2000);
     });
       this.token = sessionStorage.getItem("ACCESS_TOKEN")
-      console.log('El token ',this.token)
       if(this.token== 'undefined' || this.token == null){
         this.token = null;
       }else{
@@ -72,7 +73,21 @@ export class HeaderPrincipalComponent implements OnInit {
           }
         });
       }
+    
+    this.paginaService.obtenerPaginas().subscribe(res=>{
+      for (let i = 0; i < res.length; i++) {
+        if(res[i].estado == 'activa'){
+          this.paginas.push(res[i]);
+        }
+      }     
+    });
+      
   }
+
+  cambioDePagina(id):void{
+    this.router.navigate([`pagina/${id+1}`]);
+  }
+  
 
   mostrarContrasena(){
     let elemento :any = document.getElementById('pass');

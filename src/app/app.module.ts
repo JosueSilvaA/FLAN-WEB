@@ -28,6 +28,7 @@ import { AdminTemasComponent } from './componentes/administracion/admin-temas/ad
 import { AdminPaginaPrincipalComponent } from './componentes/administracion/admin-pagina-principal/admin-pagina-principal.component';
 import { AdminInformativasComponent } from './componentes/administracion/admin-informativas/admin-informativas.component';
 import { PostsComponent } from './componentes/administracion/posts/posts.component';
+import { EstaticasComponent } from './componentes/landing/estaticas/estaticas.component';
 
 
 
@@ -50,7 +51,8 @@ import { PostsComponent } from './componentes/administracion/posts/posts.compone
     AdminTemasComponent,
     AdminPaginaPrincipalComponent,
     AdminInformativasComponent,
-    PostsComponent
+    PostsComponent,
+    EstaticasComponent
   ],
   imports: [
     BrowserModule,

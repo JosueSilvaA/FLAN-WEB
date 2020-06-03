@@ -1,0 +1,79 @@
+.estatica{
+    min-height: 100vh;
+    background-color:    #fdfefe   ;
+}
+
+.contenedor-herramientas{
+    width: 100%;
+    height: 35vh;
+    background: url(../../../../assets/img/fondo-blog.jpg);
+    background-size: cover;
+    background-position:  center end;  
+}
+
+.categorias-herramientas{
+    width: 100%;
+    height: 100%;
+    background: #00000056;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.frase{
+    text-align: center;
+    color: white;
+    font-size: 70px;
+    font-weight: bold;
+}
+
+.separador-herramientas{
+    width: 100%;
+    height: 40px;
+    background:     #117a65   ;
+}
+
+.contenedor-contenido{
+    width: 100%;
+}
+
+.contenedor-encabezado{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.encabezado{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.contenido{
+    width: 100%;
+    text-align: justify;
+}
+
+.imagen-contenido{
+    width: 100%;
+}
+
+.imagen-contenido img{
+    width: 100%;
+    
+}
+
+.piePagina{
+    text-align: start;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.imagen{
+    display: flex;
+}
+
+hr{
+    color: black;
+    font-weight: bold;
+    background-color: black;
+}

@@ -8,6 +8,9 @@ import { AngularFireStorage } from '@angular/fire/storage'
 import { finalize } from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import { faUser,faPhotoVideo,faFileCode,faComments,faPalette,faArrowAltCircleLeft,faArrowAltCircleRight,faExclamation,faBookReader,faFileInvoice } from '@fortawesome/free-solid-svg-icons'
+import { PaginaPrincipalService} from '../../services/pagina-principal.service';
+
+
 
 
 interface HtmlInputEvent extends Event{
@@ -49,12 +52,20 @@ export class AdministracionComponent implements OnInit {
   //////////////////
   uploadPorcent: Observable<number>;
   urlImage: Observable<string>;
-
-  constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService,private firestorage:AngularFireStorage) { }
+  /////////////////////////////////////
+  tituloPaginaPrincipal:any;
+  logoPaginaPrincipal:any;
+  ///////////////////////////////////
+  public load: boolean;
+  //////////////////////////////////
+  constructor(private router:Router,private modalService:NgbModal,private usuarioService:UsuarioService,private firestorage:AngularFireStorage,private paginaPrincipalService:PaginaPrincipalService) {
+    this.load = false;
+   }
 
   ngOnInit(): void {
     this.token = sessionStorage.getItem("ACCESS_TOKEN")
-      if(this.token== 'undefined'){
+    this.usuario = sessionStorage.getItem("USUARIO");
+      if(this.usuario == 'undefined'){
         this.token = null;
         this.router.navigate(['/'])
       }else{
@@ -64,10 +75,15 @@ export class AdministracionComponent implements OnInit {
           sessionStorage.setItem("FOTO",res.foto_perfil);
           this.usuario = sessionStorage.getItem("USUARIO")
           this.fotoPerfil=sessionStorage.getItem("FOTO"); 
-        });
-        
-        
+        });   
       }
+      this.paginaPrincipalService.obtenerPaginaPrincipal().subscribe(res=>{
+        this.tituloPaginaPrincipal = res.titulo;
+        this.logoPaginaPrincipal = res.logo;
+        setTimeout(() => {
+          this.load = true;
+        }, 1000);
+      });
   }
 
   EditarInfoUsuario = new FormGroup({

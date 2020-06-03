@@ -13,6 +13,7 @@ import { AdminPaginaPrincipalComponent } from './componentes/administracion/admi
 import { AdminTemasComponent } from './componentes/administracion/admin-temas/admin-temas.component';
 import { AdminInformativasComponent } from './componentes/administracion/admin-informativas/admin-informativas.component';
 import { PostsComponent } from './componentes/administracion/posts/posts.component';
+import { EstaticasComponent } from './componentes/landing/estaticas/estaticas.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
       {path:'',component:PrincipalComponent},
       {path:'herramientas',component:HerramientasComponent},
       {path:'principal',component:PrincipalComponent},
-      {path:'blog',component:BlogComponent}
+      {path:'blog',component:BlogComponent},
+      {path:'pagina/:id',component:EstaticasComponent}
     ]
   },
   {path:'registroUsuario',component:RegistroComponent},

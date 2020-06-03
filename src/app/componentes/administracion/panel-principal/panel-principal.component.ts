@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faUserTie,faUser,faImage } from '@fortawesome/free-solid-svg-icons'
 import { UsuarioService } from './../../../services/usuario.service';
 import { PaginaPrincipalService } from './../../../services/pagina-principal.service';
-
+import { PaginaService} from '../../../services/pagina.service';
 
 @Component({
   selector: 'app-panel-principal',
@@ -18,6 +18,7 @@ export class PanelPrincipalComponent implements OnInit {
   alerta:number=1;
 
   ////////////////////////////////////
+  paginas:any = [];
   roles:any =[];
   rolUsuarioRegistrado:string;
   rolUsuarioAdmin:string;
@@ -26,7 +27,7 @@ export class PanelPrincipalComponent implements OnInit {
   /////////////////////////////////////
   paginaPrincipal:any;
 
-  constructor(private usuarioService:UsuarioService,private paginaPrincipalService:PaginaPrincipalService) { }
+  constructor(private usuarioService:UsuarioService,private paginaPrincipalService:PaginaPrincipalService,private paginaService:PaginaService) { }
 
   ngOnInit(): void {
     this.usuarioService.obtenerRoles().subscribe(res=>{
@@ -42,9 +43,11 @@ export class PanelPrincipalComponent implements OnInit {
     });
 
     this.paginaPrincipalService.obtenerPaginaPrincipal().subscribe(res=>{
-      console.log(res);
       this.paginaPrincipal = res;
-      console.log(this.paginaPrincipal.imagenes.length)
+    });
+
+    this.paginaService.obtenerPaginas().subscribe(res=>{
+      this.paginas = res;
     });
      
   }

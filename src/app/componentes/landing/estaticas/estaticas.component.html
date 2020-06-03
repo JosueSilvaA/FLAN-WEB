@@ -1,0 +1,55 @@
+<div *ngIf="load" class="estatica">
+    <div class="contenedor-herramientas">
+        <div class="categorias-herramientas">
+            <div>
+                <p class="frase">{{paginaActual.titulo}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="separador-herramientas"></div>
+    <div class="container-fluid contenedor-contenido">
+        <div class="row contenedor-encabezado mt-3">
+            <div class="col-xl-12  mt-3">
+                <p class="encabezado">
+                    {{paginaActual.encabezado}}
+                </p>
+                <hr>
+            </div>
+            <div class="col-xl-12 mb-2 contenido" *ngFor="let contenido of contenidos;let i = index">
+                <div class="contenido mb-3">
+                    {{contenido.informacion}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid contenedor-contenido" *ngIf="imagenes.length != 0">
+        <div class="row contenedor-encabezado">
+            <div class="col-xl-12">
+                <hr>
+                <p class="encabezado ">Imagenes de Referencia</p>
+            </div>
+            <div class="p-3 imagen-contenido col-xl-4 " *ngFor="let imagen of imagenes">
+                <div class=" contenido imagen">
+                   <img [src]="imagen.url" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid contenedor-contenido">
+        <div class="row contenedor-encabezado">
+            <div class="col-xl-12  contenido">
+                <hr>
+                <p class="encabezado pl-3">Referencias</p>
+                <div class="contenido mb-3 mt-3 pl-3">
+                    <li class="piePagina">{{paginaActual.piePagina}}</li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="overlay" style="height: 100vh;display: flex;justify-content: center;align-items: center;background-color: #eee6c5;" *ngIf="!load">
+    <div class="spinner-border text-warning" role="status" style="width: 80px; height: 80px;font-size: 80px;">
+        <span  class="sr-only">Loading...</span>
+    </div>   
+</div>

@@ -21,7 +21,6 @@ export class LandingComponent implements OnInit {
   }
 
   estadoSesion(estado){
-    console.log('Estado de la sesion ahorita ',estado);
     this.footerComponent.bienvenida(estado);
   }
 

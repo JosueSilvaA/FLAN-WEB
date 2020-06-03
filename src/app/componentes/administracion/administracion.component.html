@@ -1,20 +1,25 @@
 <div class="d-flex" #wrapper>
 
     <!-- Sidebar -->
-    <div *ngIf="cambio==0" class="bg-dark border-dark" id="sidebar-wrapper">
-      <div class="sidebar-heading ml-2" routerLink="/admin">
-        <img width="45px" height="45px" src="../../../assets/img/logoProyecto.png" alt="FLAN">
-        <p class="logo ml-2">FLAN</p>
+    <div *ngIf="cambio==0 "  class="bg-dark border-dark" id="sidebar-wrapper">
+      <div *ngIf="load" class="sidebar-heading ml-2" routerLink="/admin">
+        <img width="45px" height="45px" height="45px" [src]="logoPaginaPrincipal || '../../../assets/img/logoProyecto.png'" alt="FLAN">
+        <p class="logo ml-2">{{tituloPaginaPrincipal || 'FLAN'}}</p>
       </div>
+      <div class="overlay" style="background-color: #f7eab7;height: 63px;display: flex;justify-content: center;align-items: center;" *ngIf="!load">
+        <div class="spinner-border text-warning" role="status">
+            <span  class="sr-only">Loading...</span>
+        </div>   
+      </div> 
       <hr class="bg-gray">
 
       <div class="list-group list-group-flush">
         <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/usuarios"><fa-icon class="icon mr-2" [icon]="faUser"></fa-icon>Usuarios</a>
-        <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/medios"><fa-icon class="icon mr-2" [icon]="faPhotoVideo"></fa-icon>Medios</a>
+        <!-- <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/medios"><fa-icon class="icon mr-2" [icon]="faPhotoVideo"></fa-icon>Medios</a> -->
         <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/pagina-principal"><fa-icon class="icon mr-2" [icon]="faFileInvoice"></fa-icon>Pagina Principal</a>
         <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/paginas-informativas"><fa-icon class="icon mr-2" [icon]="faFileCode"></fa-icon>Pag. Informativas</a>
-        <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/posts"><fa-icon class="icon mr-2" [icon]="faBookReader"></fa-icon>Posts</a>
-        <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/temas"><fa-icon class="icon mr-2" [icon]="faPalette"></fa-icon>Temas</a>
+        <!-- <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/posts"><fa-icon class="icon mr-2" [icon]="faBookReader"></fa-icon>Posts</a>
+        <a href="#" class="list-group-item list-group-item-action bg-dark" routerLink="/admin/temas"><fa-icon class="icon mr-2" [icon]="faPalette"></fa-icon>Temas</a> -->
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -34,21 +39,21 @@
             <li ngbDropdown class="nav-item ml-3 mr-3">
                 <a class="nav-link" ngbDropdownToggle routerLink="/admin/usuarios"><fa-icon class="icon mr-2" [icon]="faUser"></fa-icon></a>
             </li>
-            <li  class="nav-item mr-3">
+            <!-- <li  class="nav-item mr-3">
                 <a class="nav-link" routerLink="/admin/medios"><fa-icon class="icon mr-2" [icon]="faPhotoVideo"></fa-icon></a>
-            </li>
+            </li> -->
             <li class="nav-item mr-3">
               <a class="nav-link" routerLink="/admin/pagina-principal"><fa-icon class="icon mr-2" [icon]="faFileInvoice"></fa-icon></a>
             </li>
             <li class="nav-item mr-3">
               <a class="nav-link" routerLink="/admin/paginas-informativas"><fa-icon class="icon mr-2" [icon]="faFileCode"></fa-icon></a>
             </li>
-            <li class="nav-item mr-3">
+            <!-- <li class="nav-item mr-3">
               <a class="nav-link" routerLink="/admin/posts"><fa-icon class="icon mr-2" [icon]="faBookReader"></fa-icon></a>
             </li>
             <li class="nav-item mr-3">
               <a class="nav-link" routerLink="/admin/temas"><fa-icon class="icon mr-2" [icon]="faPalette"></fa-icon></a>
-            </li>
+            </li> -->
           </ul>
           <ul ngbNav #nav="ngbNav"  class=" justify-content-center ml-auto">
             <li class="nav-item" *ngIf="token !=null && usuario !=''">

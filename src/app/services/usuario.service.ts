@@ -33,7 +33,6 @@ export class UsuarioService {
     pipe(tap(
       (res)=>{
         if(res){
-          console.log("respuesta",res)
           this.guardarToken(res.accessToken,res.expiresIn,res.id,res.usuario,res.foto_perfil);
         }
       }

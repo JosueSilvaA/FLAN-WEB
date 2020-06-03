@@ -58,7 +58,6 @@ export class AdminUsuariosComponent implements OnInit {
       this.rolUsuarioAdmin = this.roles[1]._id
       this.usuarioService.obtenerUsuariosPorRol(this.rolUsuarioAdmin).subscribe(res=>{
         this.usuariosAdmins=res.usuarios;
-        console.log(this.usuariosAdmins)
       });
       this.usuarioService.obtenerUsuariosPorRol(this.rolUsuarioRegistrado).subscribe(res=>{
         this.usuariosRegistrados=res.usuarios;
@@ -177,12 +176,10 @@ export class AdminUsuariosComponent implements OnInit {
 
 
   prueba():void{
-    console.log(this.roles);
   }
 
   setUsuarioSeleccionado(idUsuario){
     this.usuarioSeleccionado=idUsuario;
-    console.log(idUsuario);
   }
 
   getUsuarioSeleccionado():string{
@@ -192,9 +189,9 @@ export class AdminUsuariosComponent implements OnInit {
   eliminarUsuario(idUsuario):void{
 
     this.usuarioService.obtenerUsuario(idUsuario).subscribe(respuesta=>{
-      console.log(respuesta);
+
       if(respuesta.rol==this.rolUsuarioRegistrado){
-        console.log("ENTRO A REGISTRO")
+
         this.usuarioService.eliminarUsuario(idUsuario).subscribe(res=>{
           if(res.resultado.n==1){
              this.usuarioService.obtenerUsuariosPorRol(this.rolUsuarioRegistrado)
@@ -215,7 +212,7 @@ export class AdminUsuariosComponent implements OnInit {
       }
       
       if (respuesta.rol== this.rolUsuarioAdmin) {
-        console.log("ENTRO A ADMIN");
+
         this.usuarioService.eliminarUsuario(idUsuario).subscribe(res=>{
           if(res.resultado.n==1){
             this.usuarioService.obtenerUsuariosPorRol(this.rolUsuarioAdmin)
@@ -238,14 +235,13 @@ export class AdminUsuariosComponent implements OnInit {
   }
 
   infoUsuarioSeleccionado(idUsuario):void{
-    console.log(idUsuario);
+
     this.opcionPerfilFoto=0;
     this.opcionPerfilInfo=1;
     this.opcionPerfil=1;
     this.usuarioSeleccionado = idUsuario;
-    console.log(this.getUsuarioSeleccionado());
+
     this.usuarioService.obtenerUsuario(idUsuario).subscribe(res=>{
-      console.log(res);
       this.EditarInfoUsuario.controls['correo'].setValue(res.correo);
       this.EditarInfoUsuario.controls['usuario'].setValue(res.usuario);
       this.EditarInfoUsuario.controls['telefono'].setValue(res.telefono);
@@ -254,9 +250,9 @@ export class AdminUsuariosComponent implements OnInit {
   }
 
   editarInfoUsuario(){
-    console.log(this.EditarInfoUsuario.value);
+
     this.usuarioService.editarUsuarioAdmin(this.usuarioSeleccionado,this.EditarInfoUsuario.value).subscribe(res=>{
-      console.log(res);
+
       if(res.n==1){
         this.usuarioService.obtenerUsuariosPorRol(this.rolUsuarioRegistrado).subscribe(result=>{
           this.Toast.fire({
@@ -325,11 +321,11 @@ export class AdminUsuariosComponent implements OnInit {
   cambiarRol(){
     let usuarioSeleccionado = this.getUsuarioSeleccionado();
     this.usuarioService.obtenerUsuario(usuarioSeleccionado).subscribe(respuesta=>{
-      console.log(respuesta);
+
       if(respuesta.rol==this.rolUsuarioRegistrado){
-        console.log("ENTRO A REGISTRO")
+
         this.usuarioService.cambiarRol(usuarioSeleccionado,this.rolUsuarioAdmin).subscribe(res=>{
-          console.log(res)
+
           if(res.n==1){
             this.usuarioService.obtenerUsuariosPorRol(this.rolUsuarioRegistrado)
             .subscribe(result=>{
@@ -354,9 +350,9 @@ export class AdminUsuariosComponent implements OnInit {
       }
       
       if (respuesta.rol== this.rolUsuarioAdmin) {
-        console.log("ENTRO A ADMIN");
+
         this.usuarioService.cambiarRol(usuarioSeleccionado,this.rolUsuarioRegistrado).subscribe(res=>{
-          console.log(res)
+
           if(res.n==1){
             this.usuarioService.obtenerUsuariosPorRol(this.rolUsuarioRegistrado)
             .subscribe(result=>{

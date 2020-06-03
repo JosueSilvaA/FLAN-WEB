@@ -31,12 +31,7 @@ export class PrincipalComponent implements OnInit {
       this.descripcionPaginaPrincipal = res.descripcion;
       this.imagenesPrincipales = res.imagenes;
       this.favicon = res.favicon;
-      console.log('EL FAVICON ',this.favicon);
-      console.log(this.imagenesPrincipales)
       this.experimento();
-      console.log(this.fondoPrincipal);
-      console.log(this.fondoTestimonial);
-      console.log("SECUNDARIAS ",this.imagenesSecundarias);
       setTimeout(() => {
         this.load = true;
       }, 2000);

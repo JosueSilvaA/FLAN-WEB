@@ -23,8 +23,11 @@
       <ul ngbNav #nav="ngbNav"  class=" justify-content-center">
         <li ngbDropdown class="nav-item">
             <a href (click)="false" class="nav-link" ngbDropdownToggle>Mis Paginas</a>
-            <div ngbDropdownMenu>
-                <button ngbDropdownItem routerLink="/blog">Blog</button>
+            <div class="p-0" ngbDropdownMenu>
+                <div *ngFor="let pagina of paginas;let i = index"> 
+                  <button *ngIf="(pagina.visualizacion!='publica') && (token)" ngbDropdownItem  (click)="cambioDePagina(i)" >{{pagina.titulo}}</button>
+                  <button *ngIf="(pagina.visualizacion =='publica') && (!token)" ngbDropdownItem  (click)="cambioDePagina(i)" >{{pagina.titulo}}</button>
+                </div>
             </div>
         </li>
         <li class="nav-item">

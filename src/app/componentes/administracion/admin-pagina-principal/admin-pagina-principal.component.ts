@@ -117,7 +117,7 @@ export class AdminPaginaPrincipalComponent implements OnInit {
   }
 
   obtenerInfoImagen(idImagen):void{
-    console.log
+
     this.paginaPrincipalService.obtenerInfoImagen(idImagen,this.paginaPrincipal._id).subscribe(res=>{
       this.NuevaImagen.controls['nombreImagen'].setValue(res.nombreImagen);
       this.NuevaImagen.controls['descripcion'].setValue(res.descripcion);
@@ -125,7 +125,7 @@ export class AdminPaginaPrincipalComponent implements OnInit {
   }
 
   editarInformacion():void{
-    console.log(this.EditarInfoPrincipal.value)
+
     this.paginaPrincipalService.editarInfoPaginaPrincipal(this.EditarInfoPrincipal.value,this.paginaPrincipal._id).subscribe(res=>{
       this.paginaPrincipalService.obtenerPaginaPrincipal().subscribe(res=>{
         this.paginaPrincipal = res;
@@ -193,7 +193,7 @@ export class AdminPaginaPrincipalComponent implements OnInit {
   }
 
   borrarImagen():void{
-    console.log(this.imagenSeleccionada)
+
     this.paginaPrincipalService.eliminarImagen(this.imagenSeleccionada,this.paginaPrincipal._id).subscribe(res=>{
       this.paginaPrincipalService.obtenerPaginaPrincipal().subscribe(result=>{
         this.paginaPrincipal = result;
@@ -224,13 +224,13 @@ export class AdminPaginaPrincipalComponent implements OnInit {
 
   editarURL():void{
     this.urlImage.subscribe(url=>{
-      console.log(url)
+
       let u ={
         url:url
       }
       this.paginaPrincipalService.editarURL(u,this.imagenSeleccionada,this.paginaPrincipal._id).subscribe(res=>{
         this.paginaPrincipalService.obtenerPaginaPrincipal().subscribe(result=>{
-          console.log(res);
+
           this.paginaPrincipal = result;
           this.imagenes = result.imagenes; 
           this.modalService.dismissAll();

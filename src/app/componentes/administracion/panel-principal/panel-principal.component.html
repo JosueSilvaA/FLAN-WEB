@@ -43,7 +43,7 @@
             </ng-template>
           </ngb-panel>
         </ngb-accordion></div>
-          <div class="col-xl-6 mb-5"><ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
+          <!-- <div class="col-xl-6 mb-5"><ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
           <ngb-panel >
             <ng-template ngbPanelTitle >
               <b>Resumen de Medios</b>
@@ -52,18 +52,24 @@
               
             </ng-template>
           </ngb-panel>
-        </ngb-accordion></div>
+        </ngb-accordion></div> -->
           <div class="col-xl-6 mb-5"><ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
           <ngb-panel >
             <ng-template ngbPanelTitle >
               <b>Resumen de Paginas de informacion</b>
             </ng-template>
             <ng-template ngbPanelContent >
-              
+              <div class="container-fluid" *ngIf="paginaPrincipal != undefined">
+                <div class="row">
+                  <ul class="list-group col-xl-12">
+                    <li *ngFor="let pagina of paginas" class="list-group-item list-group-item-action" style="text-align: center; cursor: pointer;">{{pagina.titulo}}</li>
+                  </ul>
+                </div>
+              </div>
             </ng-template>
           </ngb-panel>
         </ngb-accordion></div>
-          <div class="col-xl-6 mb-5"><ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
+          <!-- <div class="col-xl-6 mb-5"><ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
           <ngb-panel >
             <ng-template ngbPanelTitle >
               <b>Resumen de Posts</b>
@@ -72,7 +78,7 @@
               
             </ng-template>
           </ngb-panel>
-        </ngb-accordion></div>
+        </ngb-accordion></div> -->
           <div class="col-xl-6 mb-5"><ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
           <ngb-panel >
             <ng-template ngbPanelTitle >
@@ -94,7 +100,7 @@
             </ng-template>
           </ngb-panel>
         </ngb-accordion></div>
-          <div class="col-xl-6 mb-5"><ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
+          <!-- <div class="col-xl-6 mb-5"><ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
           <ngb-panel >
             <ng-template ngbPanelTitle >
               <b>Resumen de Temas</b>
@@ -103,6 +109,6 @@
               
             </ng-template>
           </ngb-panel>
-        </ngb-accordion></div>
+        </ngb-accordion></div> -->
       </div>
 </div>
